@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "351339487101",
+    "firebase_url": "https://firebselivechatapp-default-rtdb.firebaseio.com",
+    "project_id": "firebselivechatapp",
+    "storage_bucket": "firebselivechatapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:351339487101:android:2438908c2223493baa3614",
+        "android_client_info": {
+          "package_name": "com.firebaselivechatapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrYElM3HjZT7Kv73Gqnh4wLXZIJ9En0uA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
