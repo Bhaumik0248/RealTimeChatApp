@@ -1,5 +1,5 @@
 export const Constant = {
-  APP_NAME: 'Firebase Live Chat',
+  APP_NAME: 'Real-Time Chat App',
   VALIDATION_MESSAGES: {
     USER_ID_NOT_FOUND: 'User ID not found. Please log in again.',
     PROFILE_UPDATED: 'Profile updated successfully!',

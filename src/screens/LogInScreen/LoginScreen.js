@@ -195,7 +195,7 @@ const LoginScreen = ({ navigation }) => {
               <Text
                 style={[loginScreenStyles.subText, { color: theme.subText }]}
               >
-                Live Chat with your friends
+                Real-time chat with your friends
               </Text>
             </View>
 

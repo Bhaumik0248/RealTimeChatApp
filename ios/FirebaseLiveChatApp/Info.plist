@@ -16,7 +16,7 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app requires microphone access for recording voice messages and videos (if needed by media picker).</string>
 	<key>CFBundleDisplayName</key>
-	<string>FirebaseLiveChatApp</string>
+	<string>Real-Time Chat App</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
