@@ -20,12 +20,11 @@ import database from '@react-native-firebase/database';
 import { useDispatch, useSelector } from 'react-redux';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 //Component or Local Imports
-import { saveUser } from '../../redux/userInfo/userAction';
-import Loader from '../../Component/Loader';
+import { saveUser } from '@store';
+import { Loader } from '@components';
+import { Images } from '@assets';
+import { showSnackbar, Constant, getTheme } from '@utils';
 import loginScreenStyles from './LoginScreenStyles';
-import { showSnackbar } from '../../utils/CommonSnackBar';
-import { Constant } from '../../utils/Constant';
-import { getTheme } from '../../utils/ThemeColors';
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -183,7 +182,7 @@ const LoginScreen = ({ navigation }) => {
 
             <View style={loginScreenStyles.headerContainer}>
               <Image
-                source={require('../../assets/images/logo.png')}
+                source={Images.logo}
                 style={loginScreenStyles.image}
                 resizeMode="contain"
               />

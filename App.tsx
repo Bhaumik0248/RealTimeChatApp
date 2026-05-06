@@ -3,14 +3,14 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { store, persistor } from './src/redux/store';
-import AppNavigator from './src/navigation/AppNavigator';
+import { store, persistor } from '@store';
+import { AppNavigator } from '@navigation';
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { StatusBar } from 'react-native';
 import { useSelector } from 'react-redux';
-import { getNavigationTheme } from './src/utils/ThemeColors';
+import { getNavigationTheme } from '@utils';
 import Toast from 'react-native-toast-message';
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
 }
 
 const AppRoot = () => {
-  const isDark = useSelector(state => state.theme?.isDark);
+  const isDark = useSelector((state: any) => state.theme?.isDark);
   const theme = getNavigationTheme(isDark);
 
   return (

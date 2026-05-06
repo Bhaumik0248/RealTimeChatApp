@@ -1,7 +1,6 @@
-import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
+import { launchImageLibrary, launchCamera, Asset, ImageLibraryOptions, CameraOptions } from 'react-native-image-picker';
 import { Alert, PermissionsAndroid, Platform } from 'react-native';
-import { showSnackbar } from '../utils/CommonSnackBar';
-import { Constant } from '../utils/Constant';
+import { showSnackbar, Constant } from '@utils';
 
 const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dguaazt2a/image/upload';
 const UPLOAD_PRESET = 'chat-app-upload';
@@ -24,7 +23,7 @@ const requestCameraPermission = async () => {
 export const pickImage = async () => {
   try {
     console.log('pickImage: initiating launchImageLibrary');
-    const options = {
+    const options: ImageLibraryOptions = {
       mediaType: 'photo',
       quality: 0.8,
       selectionLimit: 1,
@@ -42,7 +41,7 @@ export const pickImage = async () => {
     if (result.errorCode) {
       console.error('pickImage Error Code:', result.errorCode);
       console.error('pickImage Error Message:', result.errorMessage);
-      
+
       showSnackbar({
         msg: result.errorMessage || 'Failed to pick image from gallery',
         type: 'error',
@@ -79,7 +78,7 @@ export const takePhoto = async () => {
     }
 
     console.log('takePhoto: initiating launchCamera');
-    const options = {
+    const options: CameraOptions = {
       mediaType: 'photo',
       quality: 0.8,
       saveToPhotos: true,
@@ -118,7 +117,7 @@ export const takePhoto = async () => {
   }
 };
 
-export const uploadImage = async imageInput => {
+export const uploadImage = async (imageInput: Asset | string | null) => {
   if (!imageInput) return null;
 
   try {

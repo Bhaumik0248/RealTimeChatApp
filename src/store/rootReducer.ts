@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import { userReducer } from './userInfo/userReducer';
-import { themeReducer } from './theme/themeReducer';
+import { userReducer } from './reducers/userReducer';
+import { themeReducer } from './reducers/themeReducer';
 
 const rootReducer = combineReducers({
   user: userReducer,

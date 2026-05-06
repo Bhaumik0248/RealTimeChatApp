@@ -5,14 +5,12 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import { useSelector, useDispatch } from 'react-redux';
-import { CLEAR_USER } from '../redux/userInfo/userAction';
-import { getTheme } from '../utils/ThemeColors';
+import { saveUser, setTheme, CLEAR_USER } from '@store';
+import { getTheme } from '@utils';
 import auth from '@react-native-firebase/auth';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import customDrawerStyles from './CustomDrawerStyles';
-import { saveUser } from '../redux/userInfo/userAction';
-import { setTheme } from '../redux/theme/themeAction';
-const CustomDrawer = props => {
+export const CustomDrawer = props => {
   const { isDark } = useSelector(state => state.theme);
   const theme = getTheme(isDark);
   const user = useSelector(state => state.user);

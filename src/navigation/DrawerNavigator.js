@@ -3,9 +3,9 @@ import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useSelector } from 'react-redux';
-import { getTheme } from '../utils/ThemeColors';
-import HomeScreen from '../screens/HomeScreen/HomeScreen';
-import CustomDrawer from '../navigation/CustomDrawer';
+import { getTheme } from '@utils';
+import { HomeScreen } from '@screens';
+import { CustomDrawer } from '@navigation';
 
 const Drawer = createDrawerNavigator();
 

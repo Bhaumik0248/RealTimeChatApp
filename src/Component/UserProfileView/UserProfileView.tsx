@@ -1,10 +1,25 @@
 import React from 'react';
-import { View, Image, Text, StyleSheet } from 'react-native';
+import { View, Image, Text } from 'react-native';
 import { useSelector } from 'react-redux';
-import { getTheme } from '../utils/ThemeColors';
+import { getTheme } from '@utils';
+import { styles } from './UserProfileView.styles';
 
-const UserProfileView = ({ user = {}, size = 50, paddingRight = 0 }) => {
-  const isDark = useSelector(state => state.theme?.isDark);
+interface UserProfileViewProps {
+  user?: {
+    firstName?: string;
+    lastName?: string;
+    profileImage?: string;
+  };
+  size?: number;
+  paddingRight?: number;
+}
+
+const UserProfileView: React.FC<UserProfileViewProps> = ({
+  user = {},
+  size = 50,
+  paddingRight = 0,
+}) => {
+  const isDark = useSelector((state: any) => state.theme?.isDark);
   const theme = getTheme(isDark);
   const { firstName = '', lastName = '', profileImage = '' } = user;
 
@@ -29,28 +44,21 @@ const UserProfileView = ({ user = {}, size = 50, paddingRight = 0 }) => {
         <View
           style={[
             styles.placeholder,
-            { width: size, height: size, borderRadius: size / 2, backgroundColor: theme.primary },
+            {
+              width: size,
+              height: size,
+              borderRadius: size / 2,
+              backgroundColor: theme.primary,
+            },
           ]}
         >
-          <Text style={[styles.initials, { color: theme.primaryBtnText }]}>{getInitials()}</Text>
+          <Text style={[styles.initials, { color: theme.primaryBtnText }]}>
+            {getInitials()}
+          </Text>
         </View>
       )}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  image: {
-    resizeMode: 'cover',
-  },
-  placeholder: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  initials: {
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-});
 
 export default UserProfileView;

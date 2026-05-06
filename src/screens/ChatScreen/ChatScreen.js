@@ -21,16 +21,18 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import IoniconsIcon from 'react-native-vector-icons/Ionicons';
 import database, { set } from '@react-native-firebase/database';
 //Component or Local Imports
-import SendButton from '../../assets/svg/SendButton';
-import { groupMessagesByDate, getTimeFromDb } from '../../utils/CommonFuntions';
-import { pickImage, uploadImage, takePhoto } from '../../Component/UploadImage';
-import Loader from '../../Component/Loader';
-import ImagePreviewModal from '../../Component/ImagePreviewModal';
-import { Constant } from '../../utils/Constant';
+import { SendButton } from '@assets';
+import { groupMessagesByDate, getTimeFromDb, Constant, getTheme, showSnackbar } from '@utils';
+import {
+  pickImage,
+  uploadImage,
+  takePhoto,
+  Loader,
+  ImagePreviewModal,
+  UserProfileView,
+} from '@components';
 import chatScreenStyles from './ChatScreenStyles';
-import UserProfileView from '../../Component/UserProfileView';
-import { getTheme } from '../../utils/ThemeColors';
-import { showSnackbar } from '../../utils/CommonSnackBar';
+
 
 const { width, height } = Dimensions.get('screen');
 
@@ -233,7 +235,9 @@ const ChatScreen = ({ navigation, route }) => {
         return;
       }
 
-      console.log('ChatScreen: Image uploaded successfully. Sending message...');
+      console.log(
+        'ChatScreen: Image uploaded successfully. Sending message...',
+      );
       await sendMessage({
         senderId: currentUser.uid,
         receiverId: selectedUser.uid,

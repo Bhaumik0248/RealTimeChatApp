@@ -4,36 +4,41 @@ import {
   View,
   Image,
   TouchableOpacity,
-  StyleSheet,
-  Dimensions,
   FlatList,
   StatusBar,
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
+import { styles, width } from './ImagePreviewModal.styles';
 
-const { width, height } = Dimensions.get('window');
+interface ImagePreviewModalProps {
+  visible: boolean;
+  imageList: string[];
+  currentIndex: number;
+  onClose: () => void;
+}
 
-const ImagePreviewModal = ({ visible, imageList, currentIndex, onClose }) => {
-  const flatListRef = useRef();
+const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
+  visible,
+  imageList,
+  currentIndex,
+  onClose,
+}) => {
+  const flatListRef = useRef<FlatList>(null);
 
   useEffect(() => {
     if (visible && flatListRef.current) {
       setTimeout(() => {
-        flatListRef.current.scrollToIndex({
+        flatListRef.current?.scrollToIndex({
           index: currentIndex,
           animated: false,
         });
       }, 100);
     }
-  }, [visible]);
+  }, [visible, currentIndex]);
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: { item: string }) => (
     <View style={styles.imageContainer}>
-      <Image
-        source={{ uri: item }} // ✅ FIXED
-        style={styles.image}
-        resizeMode="contain"
-      />
+      <Image source={{ uri: item }} style={styles.image} resizeMode="contain" />
     </View>
   );
 
@@ -42,12 +47,10 @@ const ImagePreviewModal = ({ visible, imageList, currentIndex, onClose }) => {
       <StatusBar hidden />
 
       <View style={styles.container}>
-        {/* Close button */}
         <TouchableOpacity style={styles.closeButton} onPress={onClose}>
           <Feather name="x" size={28} color="#fff" />
         </TouchableOpacity>
 
-        {/* Image slider */}
         <FlatList
           ref={flatListRef}
           data={imageList}
@@ -56,7 +59,7 @@ const ImagePreviewModal = ({ visible, imageList, currentIndex, onClose }) => {
           pagingEnabled
           showsHorizontalScrollIndicator={false}
           keyExtractor={(item, index) => `${item}_${index}`}
-          getItemLayout={(data, index) => ({
+          getItemLayout={(_data, index) => ({
             length: width,
             offset: width * index,
             index,
@@ -66,28 +69,5 @@ const ImagePreviewModal = ({ visible, imageList, currentIndex, onClose }) => {
     </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-  },
-  closeButton: {
-    position: 'absolute',
-    top: 50,
-    right: 20,
-    zIndex: 10,
-  },
-  imageContainer: {
-    width: width,
-    height: height,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  image: {
-    width: width,
-    height: height,
-  },
-});
 
 export default ImagePreviewModal;

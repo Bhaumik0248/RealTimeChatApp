@@ -21,13 +21,10 @@ import auth from '@react-native-firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 //Component or Local Imports
-import Loader from '../../Component/Loader';
-import { pickImage, uploadImage } from '../../Component/UploadImage';
-import { saveUser } from '../../redux/userInfo/userAction';
+import { Loader, pickImage, uploadImage } from '@components';
+import { saveUser } from '@store';
 import onBoardingStyles from './OnBoardingStyles';
-import { getTheme } from '../../utils/ThemeColors';
-import { showSnackbar } from '../../utils/CommonSnackBar';
-import { Constant } from '../../utils/Constant';
+import { getTheme, showSnackbar, Constant } from '@utils';
 
 const OnBoarding = ({ route, navigation }) => {
   const dispatch = useDispatch();

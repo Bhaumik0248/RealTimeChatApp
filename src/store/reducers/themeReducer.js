@@ -1,12 +1,19 @@
-import { SET_THEME } from '../theme/themeAction';
+import { SET_THEME } from '../types';
 
 const initialState = {
   isDark: false,
 };
 
+//Actions
+export const setTheme = isDark => ({
+  type: SET_THEME,
+  payload: isDark,
+});
+
+//Reducer
 export const themeReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_THEME':
+    case SET_THEME:
       return { ...state, isDark: action.payload };
 
     default:

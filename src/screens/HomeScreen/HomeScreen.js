@@ -16,11 +16,8 @@ import { useSelector } from 'react-redux';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import IoniconsIcon from 'react-native-vector-icons/Ionicons';
 //Component or Local Imports
-import { formatTime } from '../../utils/CommonFuntions';
-import UserProfileView from '../../Component/UserProfileView';
-import Loader from '../../Component/Loader';
-import { Constant } from '../../utils/Constant';
-import { getTheme } from '../../utils/ThemeColors';
+import { formatTime, Constant, getTheme } from '@utils';
+import { UserProfileView, Loader } from '@components';
 import homeScreenStyles from './HomeScreenStyles';
 
 const HomeScreen = ({ navigation }) => {
@@ -108,11 +105,17 @@ const HomeScreen = ({ navigation }) => {
     return (
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() =>
-          navigation.navigate('ChatScreen', { user: item })
-        }
+        onPress={() => navigation.navigate('ChatScreen', { user: item })}
       >
-        <View style={[homeScreenStyles.chatItem, { backgroundColor: theme.background, borderBottomColor: theme.border }]}>
+        <View
+          style={[
+            homeScreenStyles.chatItem,
+            {
+              backgroundColor: theme.background,
+              borderBottomColor: theme.border,
+            },
+          ]}
+        >
           <UserProfileView user={item} isOnline={true} size={55} />
 
           <View style={homeScreenStyles.middle}>
@@ -127,7 +130,10 @@ const HomeScreen = ({ navigation }) => {
                 <Text
                   style={[
                     homeScreenStyles.time,
-                    { color: item.unreadCount > 0 ? theme.success : theme.subText },
+                    {
+                      color:
+                        item.unreadCount > 0 ? theme.success : theme.subText,
+                    },
                   ]}
                 >
                   {formatTime(item.timestamp)}
@@ -164,11 +170,7 @@ const HomeScreen = ({ navigation }) => {
 
   const renderEmptyState = () => (
     <View style={homeScreenStyles.emptyContainer}>
-      <IoniconsIcon
-        name="chatbubbles-outline"
-        size={80}
-        color={theme.border}
-      />
+      <IoniconsIcon name="chatbubbles-outline" size={80} color={theme.border} />
       <Text style={[homeScreenStyles.emptyTitle, { color: theme.text }]}>
         No conversations yet
       </Text>
@@ -180,7 +182,10 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View
-      style={[homeScreenStyles.mainBackground, { backgroundColor: theme.background }]}
+      style={[
+        homeScreenStyles.mainBackground,
+        { backgroundColor: theme.background },
+      ]}
     >
       <FlatList
         data={getFilteredList()}
