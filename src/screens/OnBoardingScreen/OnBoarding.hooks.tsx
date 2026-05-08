@@ -124,7 +124,7 @@ export const useOnBoardingHooks = (navigation: any, route: any) => {
       if (forEditProfile) {
         navigation.goBack();
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log('onBoardingScreen - handleSubmit - Catch : Error', error);
       showSnackbar({
         msg: Constant.VALIDATION_MESSAGES.FAILED_TO_SAVE_PROFILE,

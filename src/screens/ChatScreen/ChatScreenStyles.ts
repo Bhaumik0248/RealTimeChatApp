@@ -80,34 +80,6 @@ const chatScreenStyles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 2,
   },
-  input: {
-    flex: 1,
-    fontSize: 15,
-    paddingVertical: 8,
-    paddingRight: 8,
-    maxHeight: 120,
-  },
-
-  iconButton: {
-    padding: 6,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  sendBtn: {
-    width: 46,
-    height: 46,
-    borderRadius: 23,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 8,
-
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-  },
   noChat: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   image: { width: width * 0.65, height: height * 0.35, resizeMode: 'cover' },
 });

@@ -80,7 +80,7 @@ export const useLoginHooks = (navigation: any) => {
     }
   };
 
-  const handleAuthFlow = async (isSignup) => {
+  const handleAuthFlow = async (isSignup: boolean) => {
     try {
       let userCredential;
       if (isSignup) {
@@ -137,7 +137,7 @@ export const useLoginHooks = (navigation: any) => {
           position: Constant.SNACKBAR.BOTTOM,
         });
       }
-    } catch (error) {
+    } catch (error: any) {
       setIsLoading(false);
       console.log('LoginScreen - handleAuthFlow - Catch : Error', error);
       if (error.code === 'auth/invalid-credential') {

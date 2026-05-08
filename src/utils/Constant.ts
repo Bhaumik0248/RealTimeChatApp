@@ -25,4 +25,4 @@ export const Constant = {
     TOP: 'top',
     BOTTOM: 'bottom',
   },
-};
+} as const;

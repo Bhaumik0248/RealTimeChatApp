@@ -41,7 +41,7 @@ export const useHomeHooks = (navigation: any) => {
       const data = snapshot.val();
       if (data) {
         const userList = Object.values(data).filter(
-          user => user?.uid && user.uid !== currentUid,
+          (user: any) => user?.uid && user.uid !== currentUid,
         );
         setIsLoading(false);
         setUsers(userList);
@@ -54,7 +54,7 @@ export const useHomeHooks = (navigation: any) => {
     return () => usersRef.off('value', onValueChange);
   }, []);
 
-  const [chatMap, setChatMap] = useState({});
+  const [chatMap, setChatMap] = useState<any>({});
 
   useEffect(() => {
     const currentUid = auth().currentUser?.uid;
@@ -91,7 +91,7 @@ export const useHomeHooks = (navigation: any) => {
     });
   };
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item }: { item: any }) => {
     if (!item) return null;
 
     return (
@@ -108,7 +108,7 @@ export const useHomeHooks = (navigation: any) => {
             },
           ]}
         >
-          <UserProfileView user={item} isOnline={true} size={55} />
+          <UserProfileView user={item} size={55} />
 
           <View style={homeScreenStyles.middle}>
             <View style={homeScreenStyles.nameTimeRow}>

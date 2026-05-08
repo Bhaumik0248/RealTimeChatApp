@@ -36,7 +36,7 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
   const [keyboardVisible, setKeyboardVisible] = useState(false);
   const [imageList, setImageList] = useState<any[]>([]);
 
-  const sectionListRef = useRef<any>();
+  const sectionListRef = useRef<any>(null);
 
   useEffect(() => {
     const show = Keyboard.addListener('keyboardDidShow', () => {
@@ -55,9 +55,9 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
   }, [messageHistory]);
 
   useEffect(() => {
-    let images = [];
-    messageHistory.forEach(section => {
-      section.data.forEach(item => {
+    let images: any[] = [];
+    messageHistory.forEach((section: any) => {
+      section.data.forEach((item: any) => {
         if (item.msgType === 'image' && item.image) {
           images.push({
             id: item.id,
@@ -86,7 +86,7 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
     ref.on('value', snapshot => {
       const data = snapshot.val();
       if (data) {
-        const list = Object.entries(data).map(([id, msg]) => {
+        const list = Object.entries(data).map(([id, msg]: [string, any]) => {
           if (msg.receiverId === currentUser.uid && !msg.isSeen) {
             database()
               .ref(`chats/${chatId}/messages/${id}`)
@@ -211,14 +211,24 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
     }
   };
 
-  const sendMessage = async ({ senderId, receiverId, message, msgType }) => {
+  const sendMessage = async ({
+    senderId,
+    receiverId,
+    message,
+    msgType,
+  }: {
+    senderId: string;
+    receiverId: string;
+    message: string;
+    msgType: string;
+  }) => {
     const chatId = [senderId, receiverId].sort().join('_');
     const timestamp = database.ServerValue.TIMESTAMP;
 
     const newMessageRef = database().ref(`chats/${chatId}/messages`).push();
     const lastMsgText = msgType === 'text' ? message : '📷 Image';
 
-    const updates = {};
+    const updates: any = {};
     updates[`chats/${chatId}/messages/${newMessageRef.key}`] = {
       senderId,
       receiverId,
@@ -244,7 +254,7 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
     return database().ref().update(updates);
   };
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item }: { item: any }) => {
     if (!item) return null;
     const isMine = item.senderId === currentUser.uid;
 
