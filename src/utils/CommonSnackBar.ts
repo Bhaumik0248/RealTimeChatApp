@@ -4,6 +4,10 @@ export const showSnackbar = ({
   msg,
   position = 'bottom',
   type = 'success',
+}: {
+  msg: string;
+  position?: 'top' | 'bottom';
+  type?: 'success' | 'error' | 'info';
 }) => {
   Toast.show({
     type,

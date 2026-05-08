@@ -33,10 +33,6 @@ const AppRoot = () => {
 
   return (
     <NavigationContainer theme={theme}>
-      <StatusBar
-        barStyle={isDark ? 'light-content' : 'dark-content'}
-        backgroundColor={theme.colors.background}
-      />
       <AppNavigator />
       <Toast />
     </NavigationContainer>

@@ -10,10 +10,10 @@ import { getTheme } from '@utils';
 import auth from '@react-native-firebase/auth';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import customDrawerStyles from './CustomDrawerStyles';
-export const CustomDrawer = props => {
-  const { isDark } = useSelector(state => state.theme);
+export const CustomDrawer = (props: any) => {
+  const { isDark } = useSelector((state: any) => state.theme);
   const theme = getTheme(isDark);
-  const user = useSelector(state => state.user);
+  const user = useSelector((state: any) => state.user);
   const dispatch = useDispatch();
 
   const handleLogout = () => {

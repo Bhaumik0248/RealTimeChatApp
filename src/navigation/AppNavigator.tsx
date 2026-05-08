@@ -8,7 +8,7 @@ import DrawerNavigator from './DrawerNavigator';
 const Stack = createStackNavigator();
 
 export const AppNavigator = () => {
-  const isLoggedIn = useSelector(state => !!state.user);
+  const isLoggedIn = useSelector((state: any) => !!state.user);
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>

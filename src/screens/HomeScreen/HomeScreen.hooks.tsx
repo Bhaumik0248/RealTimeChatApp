@@ -10,15 +10,15 @@ import IoniconsIcon from 'react-native-vector-icons/Ionicons';
 import { formatTime, Constant, getTheme } from '@utils';
 // Add these imports:
 import { View, Text, TouchableOpacity } from 'react-native';
-import { UserProfileView } from '@components';
+import { UserProfileView } from 'src/component';
 import homeScreenStyles from './HomeScreenStyles';
 
-export const useHomeHooks = navigation => {
-  const [users, setUsers] = useState([]);
+export const useHomeHooks = (navigation: any) => {
+  const [users, setUsers] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const isDark = useSelector(state => state.theme?.isDark);
+  const isDark = useSelector((state: any) => state.theme?.isDark);
   const theme = getTheme(isDark);
 
   useEffect(() => {

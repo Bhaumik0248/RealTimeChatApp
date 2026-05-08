@@ -1,6 +1,5 @@
-import { StyleSheet, Dimensions } from 'react-native';
-
-const { width } = Dimensions.get('window');
+import { StyleSheet } from 'react-native';
+import { Layout } from '@resources';
 
 const customDrawerStyles = StyleSheet.create({
   container: {

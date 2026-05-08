@@ -4,11 +4,11 @@ import React from 'react';
 import { View, FlatList } from 'react-native';
 
 //Component or Local Imports
-import { Loader } from '@components';
+import { Loader, SafeView } from 'src/component';
 import homeScreenStyles from './HomeScreenStyles';
 import { useHomeHooks } from './HomeScreen.hooks';
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation }: { navigation: any }) => {
   const {
     users,
     setUsers,
@@ -26,22 +26,16 @@ const HomeScreen = ({ navigation }) => {
   } = useHomeHooks(navigation);
 
   return (
-    <View
-      style={[
-        homeScreenStyles.mainBackground,
-        { backgroundColor: theme.background },
-      ]}
-    >
+    <SafeView backgroundColor={theme.background} edges={['top', 'bottom']}>
       <FlatList
         data={getFilteredList()}
         keyExtractor={item => item.uid}
         renderItem={renderItem}
         contentContainerStyle={homeScreenStyles.listContent}
-        ListEmptyComponent={!isLoading && renderEmptyState}
         showsVerticalScrollIndicator={false}
       />
       {isLoading && <Loader />}
-    </View>
+    </SafeView>
   );
 };
 

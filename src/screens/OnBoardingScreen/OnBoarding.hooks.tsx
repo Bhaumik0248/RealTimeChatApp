@@ -6,12 +6,12 @@ import database from '@react-native-firebase/database';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { saveUser } from '@store';
 import { getTheme, showSnackbar, Constant } from '@utils';
-import { pickImage, uploadImage } from '@components';
+import { pickImage, uploadImage } from 'src/component';
 
-export const useOnBoardingHooks = (navigation, route) => {
+export const useOnBoardingHooks = (navigation: any, route: any) => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
-  const isDark = useSelector(state => state.theme?.isDark);
+  const user = useSelector((state: any) => state.user);
+  const isDark = useSelector((state: any) => state.theme?.isDark);
   const theme = getTheme(isDark);
 
   const forEditProfile = route?.params?.forEditProfile ?? false;
@@ -20,7 +20,7 @@ export const useOnBoardingHooks = (navigation, route) => {
   const [firstNameError, setFirstNameError] = useState('');
   const [lastName, setLastName] = useState('');
   const [lastNameError, setLastNameError] = useState('');
-  const [imageUri, setImageUri] = useState(null);
+  const [imageUri, setImageUri] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const uid = auth().currentUser?.uid;

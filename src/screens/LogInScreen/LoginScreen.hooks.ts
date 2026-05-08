@@ -5,7 +5,7 @@ import database from '@react-native-firebase/database';
 import { saveUser } from '@store';
 import { showSnackbar, Constant, getTheme } from '@utils';
 
-export const useLoginHooks = (navigation) => {
+export const useLoginHooks = (navigation: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -13,15 +13,15 @@ export const useLoginHooks = (navigation) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-  const isDark = useSelector(state => state.theme?.isDark);
+  const isDark = useSelector((state: any) => state.theme?.isDark);
 
   const theme = getTheme(isDark);
 
-  const getSafeEmail = (email) => {
-    return email.replace(/\./g, '_').toLowerCase();
+  const getSafeEmail = (emailStr: string) => {
+    return emailStr.replace(/\./g, '_').toLowerCase();
   };
 
-  const handleEmailChange = (text) => {
+  const handleEmailChange = (text: string) => {
     setEmail(text);
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!text.trim()) {
@@ -33,7 +33,7 @@ export const useLoginHooks = (navigation) => {
     }
   };
 
-  const handlePasswordChange = (text) => {
+  const handlePasswordChange = (text: string) => {
     setPassword(text);
     if (!text.trim()) {
       setPasswordError('Password is required');

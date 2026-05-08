@@ -16,27 +16,27 @@ import {
   uploadImage,
   takePhoto,
   UserProfileView,
-} from '@components';
+} from 'src/component';
 import chatScreenStyles from './ChatScreenStyles';
 
-export const useChatScreenHooks = (navigation, route) => {
-  const currentUser = useSelector(state => state.user);
-  const isDark = useSelector(state => state.theme?.isDark);
+export const useChatScreenHooks = (navigation: any, route: any) => {
+  const currentUser = useSelector((state: any) => state.user);
+  const isDark = useSelector((state: any) => state.theme?.isDark);
   const selectedUser = route.params?.user;
   const theme = getTheme(isDark);
 
   const [message, setMessage] = useState('');
-  const [messageHistory, setMessageHistory] = useState([]);
+  const [messageHistory, setMessageHistory] = useState<any[]>([]);
   const [noChatFound, setNoChatFound] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const [previewType, setPreviewType] = useState(null);
-  const [previewImages, setPreviewImages] = useState([]);
+  const [previewType, setPreviewType] = useState<string | null>(null);
+  const [previewImages, setPreviewImages] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [keyboardVisible, setKeyboardVisible] = useState(false);
-  const [imageList, setImageList] = useState([]);
+  const [imageList, setImageList] = useState<any[]>([]);
 
-  const sectionListRef = useRef();
+  const sectionListRef = useRef<any>();
 
   useEffect(() => {
     const show = Keyboard.addListener('keyboardDidShow', () => {

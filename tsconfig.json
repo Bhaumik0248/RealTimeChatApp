@@ -4,8 +4,8 @@
     "types": ["jest"],
     "baseUrl": ".",
     "paths": {
-      "@components": ["src/Component"],
-      "@components/*": ["src/Component/*"],
+      "@components": ["src/component"],
+      "@components/*": ["src/component/*"],
       "@navigation": ["src/navigation"],
       "@navigation/*": ["src/navigation/*"],
       "@assets": ["src/assets"],
@@ -15,7 +15,9 @@
       "@utils": ["src/utils"],
       "@utils/*": ["src/utils/*"],
       "@screens": ["src/screens"],
-      "@screens/*": ["src/screens/*"]
+      "@screens/*": ["src/screens/*"],
+      "@resources": ["src/resources"],
+      "@resources/*": ["src/resources/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],

@@ -1,9 +1,9 @@
 import moment from 'moment';
 
-export const groupMessagesByDate = (messages) => {
+export const groupMessagesByDate = (messages: any[]) => {
   if (!messages || messages.length === 0) return [];
 
-  const groups = messages.reduce((groups, message) => {
+  const groups = messages.reduce((groups: any, message) => {
     const date = moment(message.timestamp).format('DD MMM YYYY');
     if (!groups[date]) {
       groups[date] = [];
@@ -20,12 +20,12 @@ export const groupMessagesByDate = (messages) => {
   });
 };
 
-export const getTimeFromDb = (timestamp) => {
+export const getTimeFromDb = (timestamp: any) => {
   if (!timestamp) return '';
   return moment(timestamp).format('hh:mm A');
 };
 
-export const formatTime = (timestamp) => {
+export const formatTime = (timestamp: any) => {
   if (!timestamp) return '';
   const now = moment();
   const date = moment(timestamp);

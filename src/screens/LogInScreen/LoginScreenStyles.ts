@@ -1,7 +1,8 @@
 //React Native Imports
-import { StyleSheet, Dimensions, Platform } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
+import { Layout } from '@resources';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Layout.window;
 
 const loginScreenStyles = StyleSheet.create({
   container: {
@@ -14,7 +15,7 @@ const loginScreenStyles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
     justifyContent: 'center',
-    padding: 24,
+    padding: Layout.spacing.l,
   },
   headerContainer: {
     alignItems: 'center',

@@ -1,5 +1,44 @@
 import { DefaultTheme, DarkTheme } from '@react-navigation/native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Dimensions, Platform } from 'react-native';
 
+const { width, height } = Dimensions.get('window');
+
+/**
+ * Layout Constants
+ */
+export const Layout = {
+  window: {
+    width,
+    height,
+  },
+  screen: {
+    width: Dimensions.get('screen').width,
+    height: Dimensions.get('screen').height,
+  },
+  isSmallDevice: width < 375,
+  isIOS: Platform.OS === 'ios',
+  isAndroid: Platform.OS === 'android',
+  spacing: {
+    xs: 4,
+    s: 8,
+    m: 16,
+    l: 24,
+    xl: 32,
+  },
+};
+
+/**
+ * Safe Area Hooks
+ */
+export const useBottomInsets = () => {
+  const insets = useSafeAreaInsets();
+  return insets.bottom;
+};
+
+/**
+ * Theme Definitions
+ */
 export const ThemeColors = {
   light: {
     ...DefaultTheme.colors,
@@ -35,7 +74,6 @@ export const ThemeColors = {
     text: '#ffffff',
     subText: '#e9edef',
     border: '#2c3943',
-
     notification: '#ff453a',
     error: '#ff453a',
     success: '#00a884',
@@ -55,10 +93,23 @@ export const ThemeColors = {
   },
 };
 
-export const getNavigationTheme = isDark => ({
+/**
+ * Base Colors
+ */
+export const Colors = {
+  white: '#ffffff',
+  black: '#000000',
+  transparent: 'transparent',
+  ...ThemeColors.light,
+};
+
+/**
+ * Navigation Helpers
+ */
+export const getNavigationTheme = (isDark: boolean) => ({
   ...(isDark ? DarkTheme : DefaultTheme),
   colors: isDark ? ThemeColors.dark : ThemeColors.light,
 });
 
-export const getTheme = isDark =>
+export const getTheme = (isDark: boolean) =>
   isDark ? ThemeColors.dark : ThemeColors.light;
