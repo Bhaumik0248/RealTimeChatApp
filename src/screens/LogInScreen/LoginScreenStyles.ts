@@ -15,7 +15,7 @@ const loginScreenStyles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
     justifyContent: 'center',
-    padding: Layout.spacing.l,
+    padding: 24,
   },
   headerContainer: {
     alignItems: 'center',
