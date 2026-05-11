@@ -1,7 +1,7 @@
 //React Native Imports
 import { StyleSheet, Platform } from 'react-native';
 
-const homeScreenStyles = StyleSheet.create({
+const getHomeScreenStyles = (theme: any) => StyleSheet.create({
   mainBackground: {
     flex: 1,
   },
@@ -14,6 +14,8 @@ const homeScreenStyles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 14,
     paddingHorizontal: 16,
+    backgroundColor: theme.background,
+    borderBottomColor: theme.border,
   },
   middle: {
     flex: 1,
@@ -31,10 +33,17 @@ const homeScreenStyles = StyleSheet.create({
     fontWeight: '700',
     flex: 1,
     marginRight: 8,
+    color: theme.text,
   },
   time: {
     fontSize: 12,
     fontWeight: '500',
+    color: theme.subText,
+  },
+  timeUnread: {
+    fontSize: 12,
+    fontWeight: '500',
+    color: theme.success,
   },
   msgBadgeRow: {
     flexDirection: 'row',
@@ -45,6 +54,7 @@ const homeScreenStyles = StyleSheet.create({
     fontSize: 14,
     flex: 1,
     marginRight: 10,
+    color: theme.subText,
   },
   badge: {
     borderRadius: 10,
@@ -53,6 +63,7 @@ const homeScreenStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 6,
+    backgroundColor: theme.success,
   },
   badgeText: {
     color: '#fff',
@@ -70,6 +81,7 @@ const homeScreenStyles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     marginTop: 16,
+    color: theme.text,
   },
   emptySub: {
     fontSize: 14,
@@ -77,7 +89,8 @@ const homeScreenStyles = StyleSheet.create({
     marginTop: 8,
     opacity: 0.6,
     lineHeight: 20,
+    color: theme.subText,
   },
 });
 
-export default homeScreenStyles;
+export default getHomeScreenStyles;

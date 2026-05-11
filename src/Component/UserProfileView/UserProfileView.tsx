@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { View, Image, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '@types';
 import { getTheme } from '@utils';
-import { styles } from './UserProfileView.styles';
+import { getUserProfileViewStyles } from './UserProfileView.styles';
 
 interface UserProfileViewProps {
   user?: {
@@ -22,6 +22,8 @@ const UserProfileView: React.FC<UserProfileViewProps> = ({
 }) => {
   const isDark = useSelector((state: RootState) => state.theme?.isDark);
   const theme = getTheme(isDark);
+  const styles = useMemo(() => getUserProfileViewStyles(theme, size), [theme, size]);
+
   const { firstName = '', lastName = '', profileImage = '' } = user;
 
   const [imageError, setImageError] = useState(false);
@@ -34,22 +36,14 @@ const UserProfileView: React.FC<UserProfileViewProps> = ({
     return (f + l).toUpperCase();
   };
 
+  const handleImageLoad = () => setIsLoaded(true);
+  const handleImageError = () => setImageError(true);
+
   return (
     <View style={{ paddingRight }}>
-      <View
-        style={[
-          styles.placeholder,
-          {
-            width: size,
-            height: size,
-            borderRadius: size / 2,
-            backgroundColor: theme.primary,
-            overflow: 'hidden',
-          },
-        ]}
-      >
+      <View style={styles.placeholder}>
         {(!profileImage || imageError || !isLoaded) && (
-          <Text style={[styles.initials, { color: theme.primaryBtnText, position: 'absolute' }]}>
+          <Text style={styles.initials}>
             {getInitials()}
           </Text>
         )}
@@ -57,12 +51,9 @@ const UserProfileView: React.FC<UserProfileViewProps> = ({
         {!!profileImage && !imageError && (
           <Image
             source={{ uri: profileImage }}
-            style={[
-              styles.image,
-              { width: size, height: size, borderRadius: size / 2, position: 'absolute' },
-            ]}
-            onLoad={() => setIsLoaded(true)}
-            onError={() => setImageError(true)}
+            style={styles.image}
+            onLoad={handleImageLoad}
+            onError={handleImageError}
           />
         )}
       </View>

@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions, Platform } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
-const onBoardingStyles = StyleSheet.create({
+const getOnBoardingStyles = (theme: any, isDark: boolean) => StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -16,17 +16,17 @@ const onBoardingStyles = StyleSheet.create({
   },
   headerContainer: {
     alignItems: 'center',
-    marginBottom: 24, // Tighter margin
+    marginBottom: 24,
     marginTop: 10,
   },
   imageBox: {
-    width: width * 0.28, // Reduced from 0.35
+    width: width * 0.28,
     height: width * 0.28,
     borderRadius: (width * 0.28) / 2,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 16,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: isDark ? '#2a3942' : '#f0f0f0',
     ...Platform.select({
       ios: {
         shadowColor: '#000',
@@ -38,6 +38,9 @@ const onBoardingStyles = StyleSheet.create({
         elevation: 6,
       },
     }),
+  },
+  imagePlaceholder: {
+    alignItems: 'center',
   },
   image: {
     width: width * 0.28,
@@ -56,20 +59,22 @@ const onBoardingStyles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#fff',
     elevation: 4,
+    backgroundColor: theme.primary,
   },
   headingText: {
-    fontSize: 22, // Reduced from 28
+    fontSize: 22,
     fontWeight: '800',
     letterSpacing: 0.5,
     textAlign: 'center',
+    color: theme.text,
   },
   subText: {
-    fontSize: 14, // Reduced from 16
+    fontSize: 14,
     marginTop: 4,
     opacity: 0.7,
     textAlign: 'center',
+    color: theme.subText,
   },
-
   button: {
     height: 56,
     borderRadius: 16,
@@ -95,4 +100,4 @@ const onBoardingStyles = StyleSheet.create({
   },
 });
 
-export default onBoardingStyles;
+export default getOnBoardingStyles;

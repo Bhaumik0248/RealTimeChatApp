@@ -6,16 +6,27 @@ interface Styles {
   initials: TextStyle;
 }
 
-export const styles = StyleSheet.create<Styles>({
+export const getUserProfileViewStyles = (theme: any, size: number) => StyleSheet.create<Styles>({
   image: {
     resizeMode: 'cover',
+    width: size,
+    height: size,
+    borderRadius: size / 2,
+    position: 'absolute',
   },
   placeholder: {
     justifyContent: 'center',
     alignItems: 'center',
+    width: size,
+    height: size,
+    borderRadius: size / 2,
+    backgroundColor: theme.primary,
+    overflow: 'hidden',
   },
   initials: {
     fontWeight: 'bold',
     fontSize: 16,
+    color: theme.primaryBtnText,
+    position: 'absolute',
   },
 });

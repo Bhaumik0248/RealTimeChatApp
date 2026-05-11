@@ -1,9 +1,12 @@
-import { launchImageLibrary, launchCamera, Asset, ImageLibraryOptions, CameraOptions } from 'react-native-image-picker';
+import {
+  launchImageLibrary,
+  launchCamera,
+  Asset,
+  ImageLibraryOptions,
+  CameraOptions,
+} from 'react-native-image-picker';
 import { Alert, PermissionsAndroid, Platform } from 'react-native';
 import { showSnackbar, Constant } from '@utils';
-
-const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dguaazt2a/image/upload';
-const UPLOAD_PRESET = 'chat-app-upload';
 
 const requestCameraPermission = async () => {
   if (Platform.OS === 'android') {
@@ -141,10 +144,10 @@ export const uploadImage = async (imageInput: Asset | string | null) => {
       type,
       name,
     });
-    data.append('upload_preset', UPLOAD_PRESET);
+    data.append('upload_preset', Constant.UPLOAD_URLS.UPLOAD_PRESET);
     data.append('cloud_name', 'dguaazt2a');
 
-    const response = await fetch(CLOUDINARY_URL, {
+    const response = await fetch(Constant.UPLOAD_URLS.CLOUDINARY_URL, {
       method: 'POST',
       body: data,
       headers: {

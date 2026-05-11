@@ -18,4 +18,8 @@ export const Constant = {
     TOP: 'top',
     BOTTOM: 'bottom',
   },
+  UPLOAD_URLS: {
+    CLOUDINARY_URL: 'https://api.cloudinary.com/v1_1/dguaazt2a/image/upload',
+    UPLOAD_PRESET: 'chat-app-upload',
+  },
 } as const;

@@ -1,12 +1,12 @@
 //React Imports
-import React from 'react';
+import React, { useMemo } from 'react';
 //React Native Imports
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 //Third Party Imports
 import FeatherIcon from 'react-native-vector-icons/Feather';
 //Component or Local Imports
 import { Loader, SafeView, CustomTextInput, CustomSubmitButton } from '@components';
-import onBoardingStyles from './OnBoardingStyles';
+import getOnBoardingStyles from './OnBoardingStyles';
 import { useOnBoardingHooks } from './OnBoarding.hooks';
 
 const OnBoarding = ({ route, navigation }: { route: any; navigation: any }) => {
@@ -28,6 +28,8 @@ const OnBoarding = ({ route, navigation }: { route: any; navigation: any }) => {
     handleSubmit,
   } = useOnBoardingHooks(navigation, route);
 
+  const onBoardingStyles = useMemo(() => getOnBoardingStyles(theme, isDark), [theme, isDark]);
+
   return (
     <SafeView
       enableKeyboard={true}
@@ -40,10 +42,7 @@ const OnBoarding = ({ route, navigation }: { route: any; navigation: any }) => {
         <View style={onBoardingStyles.headerContainer}>
           <TouchableOpacity
             activeOpacity={0.8}
-            style={[
-              onBoardingStyles.imageBox,
-              { backgroundColor: isDark ? '#2a3942' : '#f0f0f0' },
-            ]}
+            style={onBoardingStyles.imageBox}
             onPress={handlePickImage}
           >
             {finalImage ? (
@@ -52,24 +51,19 @@ const OnBoarding = ({ route, navigation }: { route: any; navigation: any }) => {
                 style={onBoardingStyles.image}
               />
             ) : (
-              <View style={{ alignItems: 'center' }}>
+              <View style={onBoardingStyles.imagePlaceholder}>
                 <FeatherIcon name="user" size={40} color={theme.subText} />
               </View>
             )}
-            <View
-              style={[
-                onBoardingStyles.cameraIconContainer,
-                { backgroundColor: theme.primary },
-              ]}
-            >
+            <View style={onBoardingStyles.cameraIconContainer}>
               <FeatherIcon name="camera" size={18} color="#ffffff" />
             </View>
           </TouchableOpacity>
 
-          <Text style={[onBoardingStyles.headingText, { color: theme.text }]}>
+          <Text style={onBoardingStyles.headingText}>
             {forEditProfile ? 'Edit Profile' : 'Setup Profile'}
           </Text>
-          <Text style={[onBoardingStyles.subText, { color: theme.subText }]}>
+          <Text style={onBoardingStyles.subText}>
             {forEditProfile
               ? 'Update your personal details below'
               : 'Share a few details so friends can find you'}

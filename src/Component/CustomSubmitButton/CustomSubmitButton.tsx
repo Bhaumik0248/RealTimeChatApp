@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   Text,
   TouchableOpacity,
   TouchableOpacityProps,
   ActivityIndicator,
 } from 'react-native';
-import { getTheme } from '@utils';
-import { RootState } from '@types';
 import { useSelector } from 'react-redux';
-import styles from './CustomSubmitButton.styles';
+import { RootState } from '@types';
+import { getTheme } from '@utils';
+import { getCustomSubmitButtonStyles } from './CustomSubmitButton.styles';
 
 export interface CustomSubmitButtonProps extends TouchableOpacityProps {
   label?: string;
@@ -24,11 +24,12 @@ const CustomSubmitButton: React.FC<CustomSubmitButtonProps> = ({
 }) => {
   const isDark = useSelector((state: RootState) => state.theme?.isDark);
   const theme = getTheme(isDark);
+  const styles = useMemo(() => getCustomSubmitButtonStyles(theme), [theme]);
 
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      style={[styles.button, { backgroundColor: theme.primaryBtnBg }, style]}
+      style={[styles.button, style]}
       {...rest}
     >
       {isLoading ? (
@@ -36,7 +37,7 @@ const CustomSubmitButton: React.FC<CustomSubmitButtonProps> = ({
       ) : children ? (
         children
       ) : (
-        <Text style={[styles.buttonText, { color: theme.primaryBtnText }]}>
+        <Text style={styles.buttonText}>
           {label || 'Submit'}
         </Text>
       )}
