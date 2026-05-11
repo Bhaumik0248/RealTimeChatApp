@@ -1,2 +1,2 @@
-export { default as CustomSubmitButton } from './CustomSubmitButton';
-export * from './CustomSubmitButton';
+export { default as CustomSubmitButton } from './customSubmitButton';
+export * from './customSubmitButton';

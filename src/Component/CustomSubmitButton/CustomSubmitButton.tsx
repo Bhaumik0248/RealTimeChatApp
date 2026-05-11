@@ -8,7 +8,7 @@ import {
 import { useSelector } from 'react-redux';
 import { RootState } from '@types';
 import { getTheme } from '@utils';
-import { getCustomSubmitButtonStyles } from './CustomSubmitButton.styles';
+import { getCustomSubmitButtonStyles } from './customSubmitButton.styles';
 
 export interface CustomSubmitButtonProps extends TouchableOpacityProps {
   label?: string;
@@ -37,9 +37,7 @@ const CustomSubmitButton: React.FC<CustomSubmitButtonProps> = ({
       ) : children ? (
         children
       ) : (
-        <Text style={styles.buttonText}>
-          {label || 'Submit'}
-        </Text>
+        <Text style={styles.buttonText}>{label || 'Submit'}</Text>
       )}
     </TouchableOpacity>
   );
