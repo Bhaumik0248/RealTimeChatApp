@@ -6,12 +6,14 @@ import database from '@react-native-firebase/database';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { saveUser } from '@store';
 import { getTheme, showSnackbar, Constant } from '@utils';
-import { pickImage, uploadImage } from 'src/component';
+import { User, RootState } from '@types';
+import { pickImage, uploadImage } from '@components';
+import { Routes } from '@navigation';
 
 export const useOnBoardingHooks = (navigation: any, route: any) => {
   const dispatch = useDispatch();
-  const user = useSelector((state: any) => state.user);
-  const isDark = useSelector((state: any) => state.theme?.isDark);
+  const user = useSelector((state: RootState) => state.user);
+  const isDark = useSelector((state: RootState) => state.theme?.isDark);
   const theme = getTheme(isDark);
 
   const forEditProfile = route?.params?.forEditProfile ?? false;
@@ -54,8 +56,14 @@ export const useOnBoardingHooks = (navigation: any, route: any) => {
       ),
       headerLeft: () => (
         <TouchableOpacity
-          onPress={() => navigation.pop()}
-          style={{ marginRight: 10, marginLeft: canGoBack ? 10 : 0 }}
+          onPress={() => {
+            if (navigation.canGoBack()) {
+              navigation.goBack();
+            } else {
+              navigation.replace(Routes.Login);
+            }
+          }}
+          style={{ marginRight: 10, marginLeft: 10 }}
         >
           <FeatherIcon name="arrow-left" size={24} color={theme.headerText} />
         </TouchableOpacity>
@@ -123,6 +131,10 @@ export const useOnBoardingHooks = (navigation: any, route: any) => {
 
       if (forEditProfile) {
         navigation.goBack();
+      } else {
+        setTimeout(() => {
+          navigation.replace(Routes.Main);
+        }, 100);
       }
     } catch (error: any) {
       console.log('onBoardingScreen - handleSubmit - Catch : Error', error);

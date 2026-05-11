@@ -11,7 +11,10 @@ export const setTheme = (isDark: boolean) => ({
 });
 
 //Reducer
-export const themeReducer = (state = initialState, action: any) => {
+export const themeReducer = (
+  state = initialState,
+  action: { type: string; payload: boolean },
+) => {
   switch (action.type) {
     case SET_THEME:
       return { ...state, isDark: action.payload };

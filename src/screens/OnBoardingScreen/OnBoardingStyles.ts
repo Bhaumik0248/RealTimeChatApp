@@ -8,6 +8,7 @@ const onBoardingStyles = StyleSheet.create({
   },
   contentWrapper: {
     flex: 1,
+    padding: 15,
   },
   scrollContent: {
     flexGrow: 1,
@@ -68,40 +69,7 @@ const onBoardingStyles = StyleSheet.create({
     opacity: 0.7,
     textAlign: 'center',
   },
-  inputWrapper: {
-    width: '100%',
-    marginBottom: 20,
-  },
-  inputLabel: {
-    fontSize: 14,
-    fontWeight: '600',
-    marginBottom: 8,
-    marginLeft: 4,
-    opacity: 0.8,
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1.5,
-    borderRadius: 16,
-    paddingHorizontal: 16,
-    height: 56,
-  },
-  inputIcon: {
-    marginRight: 12,
-  },
-  input: {
-    flex: 1,
-    fontSize: 16,
-    height: '100%',
-  },
-  errorText: {
-    color: '#ff5252',
-    fontSize: 12,
-    marginTop: 6,
-    marginLeft: 8,
-    fontWeight: '500',
-  },
+
   button: {
     height: 56,
     borderRadius: 16,

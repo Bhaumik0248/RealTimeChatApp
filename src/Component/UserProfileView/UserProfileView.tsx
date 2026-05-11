@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Image, Text } from 'react-native';
 import { useSelector } from 'react-redux';
+import { RootState } from '@types';
 import { getTheme } from '@utils';
 import { styles } from './UserProfileView.styles';
 
@@ -19,9 +20,12 @@ const UserProfileView: React.FC<UserProfileViewProps> = ({
   size = 50,
   paddingRight = 0,
 }) => {
-  const isDark = useSelector((state: any) => state.theme?.isDark);
+  const isDark = useSelector((state: RootState) => state.theme?.isDark);
   const theme = getTheme(isDark);
   const { firstName = '', lastName = '', profileImage = '' } = user;
+
+  const [imageError, setImageError] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // 🧠 Get initials
   const getInitials = () => {
@@ -32,31 +36,36 @@ const UserProfileView: React.FC<UserProfileViewProps> = ({
 
   return (
     <View style={{ paddingRight }}>
-      {profileImage ? (
-        <Image
-          source={{ uri: profileImage }}
-          style={[
-            styles.image,
-            { width: size, height: size, borderRadius: size / 2 },
-          ]}
-        />
-      ) : (
-        <View
-          style={[
-            styles.placeholder,
-            {
-              width: size,
-              height: size,
-              borderRadius: size / 2,
-              backgroundColor: theme.primary,
-            },
-          ]}
-        >
-          <Text style={[styles.initials, { color: theme.primaryBtnText }]}>
+      <View
+        style={[
+          styles.placeholder,
+          {
+            width: size,
+            height: size,
+            borderRadius: size / 2,
+            backgroundColor: theme.primary,
+            overflow: 'hidden',
+          },
+        ]}
+      >
+        {(!profileImage || imageError || !isLoaded) && (
+          <Text style={[styles.initials, { color: theme.primaryBtnText, position: 'absolute' }]}>
             {getInitials()}
           </Text>
-        </View>
-      )}
+        )}
+        
+        {!!profileImage && !imageError && (
+          <Image
+            source={{ uri: profileImage }}
+            style={[
+              styles.image,
+              { width: size, height: size, borderRadius: size / 2, position: 'absolute' },
+            ]}
+            onLoad={() => setIsLoaded(true)}
+            onError={() => setImageError(true)}
+          />
+        )}
+      </View>
     </View>
   );
 };

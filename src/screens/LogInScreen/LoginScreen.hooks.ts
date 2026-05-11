@@ -4,6 +4,8 @@ import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import { saveUser } from '@store';
 import { showSnackbar, Constant, getTheme } from '@utils';
+import { RootState } from '@types';
+import { Routes } from '@navigation';
 
 export const useLoginHooks = (navigation: any) => {
   const [email, setEmail] = useState('');
@@ -13,7 +15,7 @@ export const useLoginHooks = (navigation: any) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-  const isDark = useSelector((state: any) => state.theme?.isDark);
+  const isDark = useSelector((state: RootState) => state.theme?.isDark);
 
   const theme = getTheme(isDark);
 
@@ -108,7 +110,7 @@ export const useLoginHooks = (navigation: any) => {
           msg: Constant.VALIDATION_MESSAGES.ACCOUNT_CREATED,
           position: Constant.SNACKBAR.BOTTOM,
         });
-        navigation.push(Constant.NAVIGATION_SCREEN.ONBOARDING, { uid });
+        navigation.push(Routes.OnBoarding, { uid });
       } else {
         userCredential = await auth().signInWithEmailAndPassword(
           email.trim(),

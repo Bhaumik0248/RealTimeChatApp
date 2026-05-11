@@ -9,7 +9,7 @@ const persistConfig = {
   storage: AsyncStorage,
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer as any);
 
 const store = createStore(persistedReducer, applyMiddleware(thunk));
 const persistor = persistStore(store);

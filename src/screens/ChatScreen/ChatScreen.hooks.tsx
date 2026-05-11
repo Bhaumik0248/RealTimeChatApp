@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import IoniconsIcon from 'react-native-vector-icons/Ionicons';
 import database from '@react-native-firebase/database';
+import { User, Message, ChatSection, RootState } from '@types';
 import {
   groupMessagesByDate,
   getTimeFromDb,
@@ -16,17 +17,17 @@ import {
   uploadImage,
   takePhoto,
   UserProfileView,
-} from 'src/component';
+} from '@components';
 import chatScreenStyles from './ChatScreenStyles';
 
 export const useChatScreenHooks = (navigation: any, route: any) => {
-  const currentUser = useSelector((state: any) => state.user);
-  const isDark = useSelector((state: any) => state.theme?.isDark);
-  const selectedUser = route.params?.user;
+  const currentUser = useSelector((state: RootState) => state.user);
+  const isDark = useSelector((state: RootState) => state.theme?.isDark);
+  const selectedUser = route.params?.user as User;
   const theme = getTheme(isDark);
 
   const [message, setMessage] = useState('');
-  const [messageHistory, setMessageHistory] = useState<any[]>([]);
+  const [messageHistory, setMessageHistory] = useState<ChatSection[]>([]);
   const [noChatFound, setNoChatFound] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -34,7 +35,7 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
   const [previewImages, setPreviewImages] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [keyboardVisible, setKeyboardVisible] = useState(false);
-  const [imageList, setImageList] = useState<any[]>([]);
+  const [imageList, setImageList] = useState<{ id: string; url: string }[]>([]);
 
   const sectionListRef = useRef<any>(null);
 
@@ -55,9 +56,9 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
   }, [messageHistory]);
 
   useEffect(() => {
-    let images: any[] = [];
-    messageHistory.forEach((section: any) => {
-      section.data.forEach((item: any) => {
+    let images: { id: string; url: string }[] = [];
+    messageHistory.forEach((section: ChatSection) => {
+      section.data.forEach((item: Message) => {
         if (item.msgType === 'image' && item.image) {
           images.push({
             id: item.id,
@@ -87,12 +88,16 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
       const data = snapshot.val();
       if (data) {
         const list = Object.entries(data).map(([id, msg]: [string, any]) => {
-          if (msg.receiverId === currentUser.uid && !msg.isSeen) {
+          const messageData = msg as Message;
+          if (
+            messageData.receiverId === currentUser?.uid &&
+            !messageData.isSeen
+          ) {
             database()
               .ref(`chats/${chatId}/messages/${id}`)
               .update({ isSeen: true });
           }
-          return { id, ...msg };
+          return { ...messageData, id };
         });
 
         const sorted = list.sort((a, b) => a.timestamp - b.timestamp);
@@ -135,7 +140,7 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
             onPress={() => {
               if (!selectedUser?.profileImage) {
                 showSnackbar({
-                  msg: Constant.VALIDATION_MESSAGES.PROFILE_IMGAE_NOT_UPLOADED,
+                  msg: Constant.VALIDATION_MESSAGES.PROFILE_IMAGE_NOT_UPLOADED,
                   position: Constant.SNACKBAR.BOTTOM,
                 });
                 return;
@@ -154,7 +159,7 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
   }, [navigation, selectedUser, theme]);
 
   const handleSend = async () => {
-    if (!message.trim()) return;
+    if (!message.trim() || !currentUser?.uid) return;
 
     await sendMessage({
       senderId: currentUser.uid,
@@ -183,6 +188,7 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
 
   const handleMedia = async (useCamera = false) => {
     try {
+      if (!currentUser?.uid) return;
       const asset = useCamera ? await takePhoto() : await pickImage();
 
       if (!asset || !asset.uri) return;
@@ -254,8 +260,8 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
     return database().ref().update(updates);
   };
 
-  const renderItem = ({ item }: { item: any }) => {
-    if (!item) return null;
+  const renderItem = ({ item }: { item: Message }) => {
+    if (!item || !currentUser?.uid) return null;
     const isMine = item.senderId === currentUser.uid;
 
     return (

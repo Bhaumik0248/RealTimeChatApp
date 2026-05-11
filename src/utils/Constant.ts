@@ -12,14 +12,7 @@ export const Constant = {
     INVALID_CREDENTIALS: 'Invalid email or password.',
     INCORRECT_PASSWORD: 'The password you entered is incorrect.',
     USER_NOT_FOUND: 'No user found with this email.',
-    PROFILE_IMGAE_NOT_UPLOADED: 'User have not uploaded profile image yet.',
-  },
-  NAVIGATION_SCREEN: {
-    LOGIN: 'Login',
-    ONBOARDING: 'OnBoarding',
-    HOME: 'Home',
-    CHAT_SCREEN: 'ChatScreen',
-    CHAT: 'ChatScreen', // Alias for robustness
+    PROFILE_IMAGE_NOT_UPLOADED: 'User have not uploaded profile image yet.',
   },
   SNACKBAR: {
     TOP: 'top',

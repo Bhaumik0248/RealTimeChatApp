@@ -1,24 +1,24 @@
 //React Imports
-import React, { useEffect, useState, useLayoutEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 //Third Party Imports
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
 import { useSelector } from 'react-redux';
-import FeatherIcon from 'react-native-vector-icons/Feather';
 import IoniconsIcon from 'react-native-vector-icons/Ionicons';
 //Component or Local Imports
-import { formatTime, Constant, getTheme } from '@utils';
-// Add these imports:
+import { formatTime, getTheme } from '@utils';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { UserProfileView } from 'src/component';
+import { UserProfileView } from '@components';
+import { User, RootState } from '@types';
+import { Routes } from '@navigation';
 import homeScreenStyles from './HomeScreenStyles';
 
 export const useHomeHooks = (navigation: any) => {
-  const [users, setUsers] = useState<any[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const isDark = useSelector((state: any) => state.theme?.isDark);
+  const isDark = useSelector((state: RootState) => state.theme?.isDark);
   const theme = getTheme(isDark);
 
   useEffect(() => {
@@ -41,8 +41,9 @@ export const useHomeHooks = (navigation: any) => {
       const data = snapshot.val();
       if (data) {
         const userList = Object.values(data).filter(
-          (user: any) => user?.uid && user.uid !== currentUid,
-        );
+          (user: any) =>
+            (user as User)?.uid && (user as User).uid !== currentUid,
+        ) as User[];
         setIsLoading(false);
         setUsers(userList);
       } else {
@@ -54,7 +55,7 @@ export const useHomeHooks = (navigation: any) => {
     return () => usersRef.off('value', onValueChange);
   }, []);
 
-  const [chatMap, setChatMap] = useState<any>({});
+  const [chatMap, setChatMap] = useState<Record<string, User>>({});
 
   useEffect(() => {
     const currentUid = auth().currentUser?.uid;
@@ -85,19 +86,20 @@ export const useHomeHooks = (navigation: any) => {
     });
 
     return filtered.sort((a, b) => {
-      if (a.timestamp && !b.timestamp) return -1;
-      if (!a.timestamp && b.timestamp) return 1;
-      return b.timestamp - a.timestamp;
+      const aTime = a.timestamp || 0;
+      const bTime = b.timestamp || 0;
+      return bTime - aTime;
     });
   };
 
-  const renderItem = ({ item }: { item: any }) => {
+  const renderItem = ({ item }: { item: User }) => {
     if (!item) return null;
+    const unreadCount = item.unreadCount || 0;
 
     return (
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => navigation.navigate('ChatScreen', { user: item })}
+        onPress={() => navigation.navigate(Routes.ChatScreen, { user: item })}
       >
         <View
           style={[
@@ -123,8 +125,7 @@ export const useHomeHooks = (navigation: any) => {
                   style={[
                     homeScreenStyles.time,
                     {
-                      color:
-                        item.unreadCount > 0 ? theme.success : theme.subText,
+                      color: unreadCount > 0 ? theme.success : theme.subText,
                     },
                   ]}
                 >
@@ -141,16 +142,14 @@ export const useHomeHooks = (navigation: any) => {
                 {item.lastMessage || 'Start a conversation'}
               </Text>
 
-              {item.unreadCount > 0 && (
+              {unreadCount > 0 && (
                 <View
                   style={[
                     homeScreenStyles.badge,
                     { backgroundColor: theme.success },
                   ]}
                 >
-                  <Text style={homeScreenStyles.badgeText}>
-                    {item.unreadCount}
-                  </Text>
+                  <Text style={homeScreenStyles.badgeText}>{unreadCount}</Text>
                 </View>
               )}
             </View>

@@ -14,7 +14,7 @@ import {
 //Third Party Imports
 import IoniconsIcon from 'react-native-vector-icons/Ionicons';
 //Component or Local Imports
-import { Loader, ImagePreviewModal, SafeView } from 'src/component';
+import { Loader, ImagePreviewModal, SafeView } from '@components';
 import chatScreenStyles from './ChatScreenStyles';
 import { useChatScreenHooks } from './ChatScreen.hooks';
 

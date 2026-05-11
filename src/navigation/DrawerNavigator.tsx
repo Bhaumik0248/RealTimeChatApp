@@ -3,6 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useSelector } from 'react-redux';
+import { RootState } from '@types';
 import { getTheme } from '@utils';
 import { HomeScreen } from '@screens';
 import { CustomDrawer } from './customDrawer';
@@ -10,7 +11,7 @@ import { CustomDrawer } from './customDrawer';
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
-  const isDark = useSelector((state: any) => state.theme?.isDark);
+  const isDark = useSelector((state: RootState) => state.theme?.isDark);
   const theme = getTheme(isDark);
 
   return (

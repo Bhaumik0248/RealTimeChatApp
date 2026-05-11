@@ -3,4 +3,5 @@ export const Routes = {
   OnBoarding: 'OnBoarding',
   ChatScreen: 'ChatScreen',
   Home: 'Home',
+  Main: 'Main',
 };

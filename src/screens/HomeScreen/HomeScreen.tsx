@@ -4,7 +4,7 @@ import React from 'react';
 import { View, FlatList } from 'react-native';
 
 //Component or Local Imports
-import { Loader, SafeView } from 'src/component';
+import { Loader, SafeView } from '@components';
 import homeScreenStyles from './HomeScreenStyles';
 import { useHomeHooks } from './HomeScreen.hooks';
 

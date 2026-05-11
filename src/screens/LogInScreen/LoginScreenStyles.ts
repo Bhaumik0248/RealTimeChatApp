@@ -10,6 +10,7 @@ const loginScreenStyles = StyleSheet.create({
   },
   contentWrapper: {
     flex: 1,
+    paddingHorizontal: 15,
   },
 
   scrollContent: {
@@ -19,9 +20,12 @@ const loginScreenStyles = StyleSheet.create({
   },
   headerContainer: {
     alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: 40,
+    marginTop: 20,
   },
   image: {
+    marginTop: 40,
     width: width * 0.25,
     height: width * 0.25,
     borderRadius: 24,
@@ -50,43 +54,6 @@ const loginScreenStyles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  inputWrapper: {
-    marginBottom: 20,
-  },
-  inputLabel: {
-    fontSize: 14,
-    fontWeight: '600',
-    marginBottom: 8,
-    marginLeft: 4,
-    opacity: 0.8,
-  },
-
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1.5,
-    borderRadius: 16,
-    paddingHorizontal: 16,
-    height: 56,
-  },
-  inputIcon: {
-    marginRight: 12,
-  },
-  textInput: {
-    flex: 1,
-    fontSize: 16,
-    height: '100%',
-  },
-  eyeIcon: {
-    padding: 8,
-  },
-  errorText: {
-    color: '#ff5252',
-    fontSize: 12,
-    marginTop: 6,
-    marginLeft: 8,
-    fontWeight: '500',
-  },
   button: {
     height: 56,
     borderRadius: 16,

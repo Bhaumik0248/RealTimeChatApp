@@ -3,17 +3,21 @@ import { View, Text, TouchableOpacity, Image, Switch } from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
+  DrawerContentComponentProps,
 } from '@react-navigation/drawer';
+import { RootState } from '@types';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveUser, setTheme, CLEAR_USER } from '@store';
 import { getTheme } from '@utils';
 import auth from '@react-native-firebase/auth';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { UserProfileView } from '@components';
 import customDrawerStyles from './CustomDrawerStyles';
-export const CustomDrawer = (props: any) => {
-  const { isDark } = useSelector((state: any) => state.theme);
+import { Routes } from '@navigation/routes';
+export const CustomDrawer = (props: DrawerContentComponentProps) => {
+  const { isDark } = useSelector((state: RootState) => state.theme);
   const theme = getTheme(isDark);
-  const user = useSelector((state: any) => state.user);
+  const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -38,16 +42,15 @@ export const CustomDrawer = (props: any) => {
           activeOpacity={0.8}
           onPress={() => {
             props.navigation.closeDrawer();
-            props.navigation.navigate('OnBoarding', { forEditProfile: true });
+            props.navigation.navigate(Routes.OnBoarding, {
+              forEditProfile: true,
+            });
           }}
           style={[customDrawerStyles.header]}
         >
-          <Image
-            source={{
-              uri: user?.profileImage || 'https://via.placeholder.com/150',
-            }}
-            style={customDrawerStyles.profileImg}
-          />
+          <View style={[customDrawerStyles.profileImg, { justifyContent: 'center', alignItems: 'center', padding: 0 }]}>
+            <UserProfileView user={user || {}} size={66} />
+          </View>
           <View style={customDrawerStyles.headerInfo}>
             <Text style={[customDrawerStyles.name, { color: theme.text }]}>
               {user?.firstName} {user?.lastName}
@@ -57,17 +60,7 @@ export const CustomDrawer = (props: any) => {
             </Text>
           </View>
         </TouchableOpacity>
-        {/* 
-        <View style={customDrawerStyles.drawerItems}>
-          <DrawerItemList
-            {...props}
-            activeTintColor={theme.primary}
-            inactiveTintColor={theme.text}
-            labelStyle={[customDrawerStyles.drawerLabel, { color: theme.text }]}
-          />
-        </View> */}
 
-        {/* Theme Settings Section */}
         <View
           style={[customDrawerStyles.section, { borderTopColor: theme.border }]}
         >

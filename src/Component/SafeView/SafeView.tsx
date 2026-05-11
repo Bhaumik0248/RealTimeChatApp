@@ -15,6 +15,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import { useSelector } from 'react-redux';
 import { Colors, useBottomInsets, getTheme } from '@resources';
+import { RootState } from '@types';
 
 interface SafeViewProps {
   children: React.ReactNode;
@@ -43,7 +44,7 @@ const SafeView = ({
   enableKeyboard = false,
   extraScrollHeight = 0,
 }: SafeViewProps) => {
-  const isDark = useSelector((state: any) => state.theme?.isDark);
+  const isDark = useSelector((state: RootState) => state.theme?.isDark);
   const theme = getTheme(isDark);
 
   const finalStatusBarStyle: StatusBarStyle =

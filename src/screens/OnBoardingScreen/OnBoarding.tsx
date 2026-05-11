@@ -5,7 +5,7 @@ import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 //Third Party Imports
 import FeatherIcon from 'react-native-vector-icons/Feather';
 //Component or Local Imports
-import { Loader, SafeView } from 'src/component';
+import { Loader, SafeView, CustomTextInput } from '@components';
 import onBoardingStyles from './OnBoardingStyles';
 import { useOnBoardingHooks } from './OnBoarding.hooks';
 
@@ -76,75 +76,29 @@ const OnBoarding = ({ route, navigation }: { route: any; navigation: any }) => {
           </Text>
         </View>
 
-        <View style={onBoardingStyles.inputWrapper}>
-          <Text style={[onBoardingStyles.inputLabel, { color: theme.text }]}>
-            First Name
-          </Text>
-          <View
-            style={[
-              onBoardingStyles.inputContainer,
-              {
-                borderColor: firstNameError ? '#ff5252' : theme.border,
-                backgroundColor: isDark ? '#2a3942' : '#ffffff',
-              },
-            ]}
-          >
-            <FeatherIcon
-              name="user"
-              size={20}
-              color={theme.subText}
-              style={onBoardingStyles.inputIcon}
-            />
-            <TextInput
-              placeholder="Enter first name"
-              placeholderTextColor={theme.subText}
-              value={firstName}
-              onChangeText={text => {
-                setFirstName(text);
-                if (firstNameError) setFirstNameError('');
-              }}
-              style={[onBoardingStyles.input, { color: theme.text }]}
-            />
-          </View>
-          {firstNameError ? (
-            <Text style={onBoardingStyles.errorText}>{firstNameError}</Text>
-          ) : null}
-        </View>
+        <CustomTextInput
+          label="First Name"
+          placeholder="Enter first name"
+          value={firstName}
+          onChangeText={text => {
+            setFirstName(text);
+            if (firstNameError) setFirstNameError('');
+          }}
+          error={firstNameError}
+          leftIcon={<FeatherIcon name="user" size={20} color={theme.subText} />}
+        />
 
-        <View style={onBoardingStyles.inputWrapper}>
-          <Text style={[onBoardingStyles.inputLabel, { color: theme.text }]}>
-            Last Name
-          </Text>
-          <View
-            style={[
-              onBoardingStyles.inputContainer,
-              {
-                borderColor: lastNameError ? '#ff5252' : theme.border,
-                backgroundColor: isDark ? '#2a3942' : '#ffffff',
-              },
-            ]}
-          >
-            <FeatherIcon
-              name="user"
-              size={20}
-              color={theme.subText}
-              style={onBoardingStyles.inputIcon}
-            />
-            <TextInput
-              placeholder="Enter last name"
-              placeholderTextColor={theme.subText}
-              value={lastName}
-              onChangeText={text => {
-                setLastName(text);
-                if (lastNameError) setLastNameError('');
-              }}
-              style={[onBoardingStyles.input, { color: theme.text }]}
-            />
-          </View>
-          {lastNameError ? (
-            <Text style={onBoardingStyles.errorText}>{lastNameError}</Text>
-          ) : null}
-        </View>
+        <CustomTextInput
+          label="Last Name"
+          placeholder="Enter last name"
+          value={lastName}
+          onChangeText={text => {
+            setLastName(text);
+            if (lastNameError) setLastNameError('');
+          }}
+          error={lastNameError}
+          leftIcon={<FeatherIcon name="user" size={20} color={theme.subText} />}
+        />
 
         <TouchableOpacity
           onPress={handleSubmit}

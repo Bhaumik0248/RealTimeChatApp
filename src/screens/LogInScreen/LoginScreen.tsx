@@ -1,22 +1,11 @@
 //React Imports
 import React from 'react';
 //React Native Imports
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  KeyboardAvoidingView,
-  ScrollView,
-  TouchableWithoutFeedback,
-  Keyboard,
-  Platform,
-} from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 //Third Party Imports
 import FeatherIcon from 'react-native-vector-icons/Feather';
 //Component or Local Imports
-import { Loader, SafeView } from 'src/component';
+import { Loader, SafeView, CustomTextInput } from '@components';
 import { Images } from '@assets';
 import { Constant } from '@utils';
 import loginScreenStyles from './LoginScreenStyles';
@@ -61,82 +50,35 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
           </Text>
         </View>
 
-        <View style={loginScreenStyles.inputWrapper}>
-          <Text style={[loginScreenStyles.inputLabel, { color: theme.text }]}>
-            Email Address
-          </Text>
-          <View
-            style={[
-              loginScreenStyles.inputContainer,
-              {
-                borderColor: emailError ? '#ff5252' : theme.border,
-                backgroundColor: isDark ? '#2a3942' : '#ffffff',
-              },
-            ]}
-          >
-            <FeatherIcon
-              name="mail"
-              size={20}
-              color={theme.subText}
-              style={loginScreenStyles.inputIcon}
-            />
-            <TextInput
-              placeholder="Enter your email"
-              placeholderTextColor={!isDark ? '#2a3942' : '#ffffff'}
-              value={email}
-              onChangeText={handleEmailChange}
-              style={[loginScreenStyles.textInput, { color: theme.text }]}
-              keyboardType="email-address"
-              autoCapitalize="none"
-            />
-          </View>
-          {emailError ? (
-            <Text style={loginScreenStyles.errorText}>{emailError}</Text>
-          ) : null}
-        </View>
+        <CustomTextInput
+          label="Email Address"
+          placeholder="Enter your email"
+          value={email}
+          onChangeText={handleEmailChange}
+          keyboardType="email-address"
+          autoCapitalize="none"
+          error={emailError}
+          leftIcon={<FeatherIcon name="mail" size={20} color={theme.subText} />}
+        />
 
-        <View style={loginScreenStyles.inputWrapper}>
-          <Text style={[loginScreenStyles.inputLabel, { color: theme.text }]}>
-            Password
-          </Text>
-          <View
-            style={[
-              loginScreenStyles.inputContainer,
-              {
-                borderColor: emailError ? '#ff5252' : theme.border,
-                backgroundColor: isDark ? '#2a3942' : '#ffffff',
-              },
-            ]}
-          >
-            <FeatherIcon
-              name="lock"
-              size={20}
-              color={theme.subText}
-              style={loginScreenStyles.inputIcon}
-            />
-            <TextInput
-              placeholder="Enter your password"
-              placeholderTextColor={!isDark ? '#2a3942' : '#ffffff'}
-              value={password}
-              onChangeText={handlePasswordChange}
-              style={[loginScreenStyles.textInput, { color: theme.text }]}
-              secureTextEntry={!showPassword}
-            />
-            <TouchableOpacity
-              onPress={() => setShowPassword(!showPassword)}
-              style={loginScreenStyles.eyeIcon}
-            >
+        <CustomTextInput
+          label="Password"
+          placeholder="Enter your password"
+          value={password}
+          onChangeText={handlePasswordChange}
+          secureTextEntry={!showPassword}
+          error={passwordError}
+          leftIcon={<FeatherIcon name="lock" size={20} color={theme.subText} />}
+          rightIcon={
+            <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
               <FeatherIcon
                 name={showPassword ? 'eye' : 'eye-off'}
                 size={20}
                 color={theme.subText}
               />
             </TouchableOpacity>
-          </View>
-          {passwordError ? (
-            <Text style={loginScreenStyles.errorText}>{passwordError}</Text>
-          ) : null}
-        </View>
+          }
+        />
 
         <TouchableOpacity
           onPress={checkUserExists}

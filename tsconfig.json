@@ -17,7 +17,9 @@
       "@screens": ["src/screens"],
       "@screens/*": ["src/screens/*"],
       "@resources": ["src/resources"],
-      "@resources/*": ["src/resources/*"]
+      "@resources/*": ["src/resources/*"],
+      "@types": ["src/types"],
+      "@types/*": ["src/types/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
