@@ -10,7 +10,7 @@ import { Images } from '@assets';
 import { Constant } from '@utils';
 import loginScreenStyles from './LoginScreenStyles';
 import { useLoginHooks } from './LoginScreen.hooks';
-
+import { CustomSubmitButton } from '@components';
 const LoginScreen = ({ navigation }: { navigation: any }) => {
   const {
     email,
@@ -80,23 +80,7 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
           }
         />
 
-        <TouchableOpacity
-          onPress={checkUserExists}
-          activeOpacity={0.8}
-          style={[
-            loginScreenStyles.button,
-            { backgroundColor: theme.primaryBtnBg },
-          ]}
-        >
-          <Text
-            style={[
-              loginScreenStyles.buttonText,
-              { color: theme.primaryBtnText },
-            ]}
-          >
-            Continue
-          </Text>
-        </TouchableOpacity>
+        <CustomSubmitButton label="Continue" onPress={checkUserExists} />
       </View>
     </SafeView>
   );

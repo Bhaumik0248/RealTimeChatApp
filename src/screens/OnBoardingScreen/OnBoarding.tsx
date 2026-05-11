@@ -5,7 +5,7 @@ import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 //Third Party Imports
 import FeatherIcon from 'react-native-vector-icons/Feather';
 //Component or Local Imports
-import { Loader, SafeView, CustomTextInput } from '@components';
+import { Loader, SafeView, CustomTextInput, CustomSubmitButton } from '@components';
 import onBoardingStyles from './OnBoardingStyles';
 import { useOnBoardingHooks } from './OnBoarding.hooks';
 
@@ -100,15 +100,10 @@ const OnBoarding = ({ route, navigation }: { route: any; navigation: any }) => {
           leftIcon={<FeatherIcon name="user" size={20} color={theme.subText} />}
         />
 
-        <TouchableOpacity
+        <CustomSubmitButton
           onPress={handleSubmit}
-          activeOpacity={0.8}
-          style={[onBoardingStyles.button, { backgroundColor: theme.primary }]}
-        >
-          <Text style={[onBoardingStyles.buttonText, { color: '#ffffff' }]}>
-            {forEditProfile ? 'Update Profile' : 'Save & Continue'}
-          </Text>
-        </TouchableOpacity>
+          label={forEditProfile ? 'Update Profile' : 'Save & Continue'}
+        />
       </View>
     </SafeView>
   );

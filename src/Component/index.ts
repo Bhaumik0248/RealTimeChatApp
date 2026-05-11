@@ -4,3 +4,4 @@ export { default as UserProfileView } from './UserProfileView';
 export * from './UploadImage';
 export { default as SafeView } from './SafeView';
 export * from './CustomTextInput';
+export * from './CustomSubmitButton';
