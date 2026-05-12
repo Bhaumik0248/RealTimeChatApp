@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
 import { useSelector } from 'react-redux';
+//Component or Local Imports
 import { getTheme } from '@utils';
 import { User, RootState } from '@types';
 

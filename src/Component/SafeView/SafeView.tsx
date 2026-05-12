@@ -1,4 +1,6 @@
+//React Imports
 import React from 'react';
+//React Native Imports
 import {
   View,
   StatusBar,
@@ -8,12 +10,12 @@ import {
   Platform,
   StyleProp,
 } from 'react-native';
-
+//Third Party Imports
 import { useSafeAreaInsets, Edge } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
 import { useSelector } from 'react-redux';
+//Component or Local Imports
 import { Colors, useBottomInsets, getTheme } from '@resources';
 import { RootState } from '@types';
 
@@ -140,5 +142,3 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 });
-
-

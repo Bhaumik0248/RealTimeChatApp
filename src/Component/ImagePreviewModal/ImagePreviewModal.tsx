@@ -1,4 +1,6 @@
+//React Imports
 import React, { useRef, useEffect } from 'react';
+//React Native Imports
 import {
   Modal,
   View,
@@ -7,7 +9,9 @@ import {
   FlatList,
   StatusBar,
 } from 'react-native';
+//Third Party Imports
 import Feather from 'react-native-vector-icons/Feather';
+//Component or Local Imports
 import { styles, width } from './imagePreviewModal.styles';
 
 interface ImagePreviewModalProps {

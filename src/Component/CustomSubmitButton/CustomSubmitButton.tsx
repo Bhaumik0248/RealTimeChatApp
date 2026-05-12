@@ -1,11 +1,15 @@
+//React Imports
 import React, { useMemo } from 'react';
+//React Native Imports
 import {
   Text,
   TouchableOpacity,
   TouchableOpacityProps,
   ActivityIndicator,
 } from 'react-native';
+//Third Party Imports
 import { useSelector } from 'react-redux';
+//Component or Local Imports
 import { RootState } from '@types';
 import { getTheme } from '@utils';
 import { getCustomSubmitButtonStyles } from './customSubmitButton.styles';

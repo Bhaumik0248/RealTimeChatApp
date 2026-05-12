@@ -1,7 +1,10 @@
+//React Imports
 import { useState } from 'react';
+//Third Party Imports
 import { useDispatch, useSelector } from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
+//Component or Local Imports
 import { saveUser } from '@store';
 import { showSnackbar, Constant, getTheme } from '@utils';
 import { RootState } from '@types';

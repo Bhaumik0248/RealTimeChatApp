@@ -1,8 +1,12 @@
+//React Imports
 import React from 'react';
+//React Native Imports
 import { TouchableOpacity } from 'react-native';
+//Third Party Imports
 import Icon from 'react-native-vector-icons/Ionicons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useSelector } from 'react-redux';
+//Component or Local Imports
 import { RootState } from '@types';
 import { getTheme } from '@utils';
 import { HomeScreen } from '@screens';

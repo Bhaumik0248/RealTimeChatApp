@@ -1,4 +1,6 @@
+//React Imports
 import * as React from 'react';
+//Third Party Imports
 import Svg, { Path, SvgProps } from 'react-native-svg';
 
 export const SendButton = (props: SvgProps) => (

@@ -1,4 +1,6 @@
+//React Imports
 import React from 'react';
+//React Native Imports
 import {
   View,
   TextInput,
@@ -8,7 +10,9 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
+//Third Party Imports
 import { useTheme } from '@react-navigation/native';
+//Component or Local Imports
 import getStyles from './customTextInput.styles';
 
 export interface CustomTextInputProps extends TextInputProps {
@@ -39,7 +43,8 @@ export const CustomTextInput: React.FC<CustomTextInputProps> = ({
         style={[
           styles.inputContainer,
           error ? styles.inputContainerError : null,
-        ]}>
+        ]}
+      >
         {leftIcon && <View style={styles.leftIcon}>{leftIcon}</View>}
         <TextInput
           style={[styles.input, inputStyle]}

@@ -5,12 +5,11 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 //Third Party Imports
 import FeatherIcon from 'react-native-vector-icons/Feather';
 //Component or Local Imports
-import { Loader, SafeView, CustomTextInput } from '@components';
+import { Loader, SafeView, CustomTextInput, CustomSubmitButton } from '@components';
 import { Images } from '@assets';
 import { Constant } from '@utils';
 import loginScreenStyles from './loginScreenStyles';
 import { useLoginHooks } from './loginScreen.hooks';
-import { CustomSubmitButton } from '@components';
 
 export const LoginScreen = ({ navigation }: { navigation: any }) => {
   const {

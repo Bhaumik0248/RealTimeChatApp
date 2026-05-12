@@ -1,6 +1,10 @@
+//React Imports
 import React, { useState, useMemo } from 'react';
+//React Native Imports
 import { View, Image, Text } from 'react-native';
+//Third Party Imports
 import { useSelector } from 'react-redux';
+//Component or Local Imports
 import { RootState } from '@types';
 import { getTheme } from '@utils';
 import { getUserProfileViewStyles } from './userProfileView.styles';
@@ -22,7 +26,10 @@ export const UserProfileView: React.FC<UserProfileViewProps> = ({
 }) => {
   const isDark = useSelector((state: RootState) => state.theme?.isDark);
   const theme = getTheme(isDark);
-  const styles = useMemo(() => getUserProfileViewStyles(theme, size), [theme, size]);
+  const styles = useMemo(
+    () => getUserProfileViewStyles(theme, size),
+    [theme, size],
+  );
 
   const { firstName = '', lastName = '', profileImage = '' } = user;
 
@@ -43,11 +50,9 @@ export const UserProfileView: React.FC<UserProfileViewProps> = ({
     <View style={{ paddingRight }}>
       <View style={styles.placeholder}>
         {(!profileImage || imageError || !isLoaded) && (
-          <Text style={styles.initials}>
-            {getInitials()}
-          </Text>
+          <Text style={styles.initials}>{getInitials()}</Text>
         )}
-        
+
         {!!profileImage && !imageError && (
           <Image
             source={{ uri: profileImage }}

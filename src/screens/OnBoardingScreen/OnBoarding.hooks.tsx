@@ -1,9 +1,13 @@
+//React Imports
 import React, { useState, useEffect, useLayoutEffect } from 'react';
+//React Native Imports
 import { Keyboard, TouchableOpacity, Text } from 'react-native';
+//Third Party Imports
 import { useDispatch, useSelector } from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+//Component or Local Imports
 import { saveUser } from '@store';
 import { getTheme, showSnackbar, Constant } from '@utils';
 import { User, RootState } from '@types';

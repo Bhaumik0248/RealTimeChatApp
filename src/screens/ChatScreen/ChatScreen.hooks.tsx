@@ -1,9 +1,13 @@
+//React Imports
 import React, { useEffect, useState, useLayoutEffect, useRef } from 'react';
+//React Native Imports
 import { Keyboard, TouchableOpacity, Text, View, Image } from 'react-native';
+//Third Party Imports
 import { useSelector } from 'react-redux';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import IoniconsIcon from 'react-native-vector-icons/Ionicons';
 import database from '@react-native-firebase/database';
+//Component or Local Imports
 import { User, Message, ChatSection, RootState } from '@types';
 import {
   groupMessagesByDate,

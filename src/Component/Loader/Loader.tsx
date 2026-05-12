@@ -1,6 +1,10 @@
+//React Imports
 import React from 'react';
+//React Native Imports
 import { View, ActivityIndicator, Modal } from 'react-native';
+//Third Party Imports
 import { useSelector } from 'react-redux';
+//Component or Local Imports
 import { RootState } from '@types';
 import { getTheme } from '@utils';
 import { styles } from './loader.styles';

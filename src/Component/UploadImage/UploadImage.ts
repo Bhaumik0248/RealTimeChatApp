@@ -1,3 +1,6 @@
+//React Native Imports
+import { Alert, PermissionsAndroid, Platform } from 'react-native';
+//Third Party Imports
 import {
   launchImageLibrary,
   launchCamera,
@@ -5,7 +8,7 @@ import {
   ImageLibraryOptions,
   CameraOptions,
 } from 'react-native-image-picker';
-import { Alert, PermissionsAndroid, Platform } from 'react-native';
+//Component or Local Imports
 import { showSnackbar, Constant } from '@utils';
 
 const requestCameraPermission = async () => {

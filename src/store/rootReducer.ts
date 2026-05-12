@@ -1,4 +1,6 @@
+//Third Party Imports
 import { combineReducers } from 'redux';
+//Component or Local Imports
 import { userReducer } from './reducers/userReducer';
 import { themeReducer } from './reducers/themeReducer';
 

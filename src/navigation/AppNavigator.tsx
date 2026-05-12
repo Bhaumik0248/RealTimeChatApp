@@ -1,8 +1,10 @@
+//React Imports
 import React from 'react';
+//Third Party Imports
 import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector } from 'react-redux';
+//Component or Local Imports
 import { RootState } from '@types';
-
 import {
   LoginScreen,
   OnBoarding,

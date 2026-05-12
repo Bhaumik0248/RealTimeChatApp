@@ -1,3 +1,4 @@
+//Component or Local Imports
 import { SET_THEME } from '../types';
 
 const initialState = {

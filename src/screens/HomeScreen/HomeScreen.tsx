@@ -2,8 +2,8 @@
 import React, { useMemo } from 'react';
 //React Native Imports
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+//Third Party Imports
 import IoniconsIcon from 'react-native-vector-icons/Ionicons';
-
 //Component or Local Imports
 import { Loader, SafeView, UserProfileView } from '@components';
 import { formatTime } from '@utils';
@@ -13,12 +13,8 @@ import getHomeScreenStyles from './homeScreenStyles';
 import { useHomeHooks } from './homeScreen.hooks';
 
 export const HomeScreen = ({ navigation }: { navigation: any }) => {
-  const {
-    isLoading,
-    isDark,
-    theme,
-    getFilteredList,
-  } = useHomeHooks(navigation);
+  const { isLoading, isDark, theme, getFilteredList } =
+    useHomeHooks(navigation);
 
   const homeScreenStyles = useMemo(() => getHomeScreenStyles(theme), [theme]);
 
@@ -41,7 +37,11 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
               </Text>
               {item.timestamp ? (
                 <Text
-                  style={unreadCount > 0 ? homeScreenStyles.timeUnread : homeScreenStyles.time}
+                  style={
+                    unreadCount > 0
+                      ? homeScreenStyles.timeUnread
+                      : homeScreenStyles.time
+                  }
                 >
                   {formatTime(item.timestamp)}
                 </Text>
@@ -68,9 +68,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
   const renderEmptyState = () => (
     <View style={homeScreenStyles.emptyContainer}>
       <IoniconsIcon name="chatbubbles-outline" size={80} color={theme.border} />
-      <Text style={homeScreenStyles.emptyTitle}>
-        No conversations yet
-      </Text>
+      <Text style={homeScreenStyles.emptyTitle}>No conversations yet</Text>
       <Text style={homeScreenStyles.emptySub}>
         Tap on a friend to start chatting. Your conversations will appear here.
       </Text>
@@ -78,7 +76,7 @@ export const HomeScreen = ({ navigation }: { navigation: any }) => {
   );
 
   return (
-    <SafeView backgroundColor={theme.background} edges={['top', 'bottom']}>
+    <SafeView backgroundColor={theme.background}>
       <FlatList
         data={getFilteredList()}
         keyExtractor={item => item.uid}

@@ -1,16 +1,20 @@
+//React Imports
 import React from 'react';
+//React Native Imports
 import { View, Text, TouchableOpacity, Image, Switch } from 'react-native';
+//Third Party Imports
 import {
   DrawerContentScrollView,
   DrawerItemList,
   DrawerContentComponentProps,
 } from '@react-navigation/drawer';
-import { RootState } from '@types';
 import { useSelector, useDispatch } from 'react-redux';
-import { saveUser, setTheme, CLEAR_USER } from '@store';
-import { getTheme } from '@utils';
 import auth from '@react-native-firebase/auth';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+//Component or Local Imports
+import { RootState } from '@types';
+import { saveUser, setTheme, CLEAR_USER } from '@store';
+import { getTheme } from '@utils';
 import { UserProfileView } from '@components';
 import { Routes } from '@navigation/routes';
 import customDrawerStyles from './customDrawerStyles';
