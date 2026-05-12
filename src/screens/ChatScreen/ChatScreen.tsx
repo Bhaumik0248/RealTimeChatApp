@@ -13,10 +13,10 @@ import {
 import IoniconsIcon from 'react-native-vector-icons/Ionicons';
 //Component or Local Imports
 import { Loader, ImagePreviewModal, SafeView } from '@components';
-import chatScreenStyles from './ChatScreenStyles';
-import { useChatScreenHooks } from './ChatScreen.hooks';
+import chatScreenStyles from './chatScreenStyles';
+import { useChatScreenHooks } from './chatScreen.hooks';
 
-const ChatScreen = ({ navigation, route }: { navigation: any; route: any }) => {
+export const ChatScreen = ({ navigation, route }: { navigation: any; route: any }) => {
   const {
     message,
     setMessage,
@@ -141,5 +141,3 @@ const ChatScreen = ({ navigation, route }: { navigation: any; route: any }) => {
     </SafeView>
   );
 };
-
-export default ChatScreen;

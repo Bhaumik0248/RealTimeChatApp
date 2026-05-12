@@ -15,7 +15,7 @@ export interface CustomSubmitButtonProps extends TouchableOpacityProps {
   isLoading?: boolean;
 }
 
-const CustomSubmitButton: React.FC<CustomSubmitButtonProps> = ({
+export const CustomSubmitButton: React.FC<CustomSubmitButtonProps> = ({
   label,
   isLoading,
   style,
@@ -42,5 +42,3 @@ const CustomSubmitButton: React.FC<CustomSubmitButtonProps> = ({
     </TouchableOpacity>
   );
 };
-
-export default CustomSubmitButton;

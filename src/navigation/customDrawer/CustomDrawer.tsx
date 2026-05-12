@@ -12,8 +12,9 @@ import { getTheme } from '@utils';
 import auth from '@react-native-firebase/auth';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { UserProfileView } from '@components';
-import customDrawerStyles from './CustomDrawerStyles';
 import { Routes } from '@navigation/routes';
+import customDrawerStyles from './customDrawerStyles';
+
 export const CustomDrawer = (props: DrawerContentComponentProps) => {
   const { isDark } = useSelector((state: RootState) => state.theme);
   const theme = getTheme(isDark);
@@ -112,5 +113,3 @@ export const CustomDrawer = (props: DrawerContentComponentProps) => {
     </View>
   );
 };
-
-export default CustomDrawer;

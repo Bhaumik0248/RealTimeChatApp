@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 import { getNavigationTheme } from '@utils';
 import Toast from 'react-native-toast-message';
 
-function App() {
+export function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Provider store={store}>
@@ -39,4 +39,4 @@ const AppRoot = () => {
   );
 };
 
-export default App;
+

@@ -18,7 +18,7 @@ import {
   takePhoto,
   UserProfileView,
 } from '@components';
-import chatScreenStyles from './ChatScreenStyles';
+import chatScreenStyles from './chatScreenStyles';
 
 export const useChatScreenHooks = (navigation: any, route: any) => {
   const currentUser = useSelector((state: RootState) => state.user);

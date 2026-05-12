@@ -8,7 +8,7 @@ import {
   StatusBar,
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
-import { styles, width } from './ImagePreviewModal.styles';
+import { styles, width } from './imagePreviewModal.styles';
 
 interface ImagePreviewModalProps {
   visible: boolean;
@@ -17,7 +17,7 @@ interface ImagePreviewModalProps {
   onClose: () => void;
 }
 
-const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
+export const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
   visible,
   imageList,
   currentIndex,
@@ -69,5 +69,3 @@ const ImagePreviewModal: React.FC<ImagePreviewModalProps> = ({
     </Modal>
   );
 };
-
-export default ImagePreviewModal;

@@ -1,3 +1,3 @@
-export * from './Colors';
-export * from './Layout';
-export * from './Theme';
+export * from './colors';
+export * from './layout';
+export * from './theme';

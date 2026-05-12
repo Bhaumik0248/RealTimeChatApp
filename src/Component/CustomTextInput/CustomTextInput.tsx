@@ -9,7 +9,7 @@ import {
   TextStyle,
 } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import getStyles from './CustomTextInput.styles';
+import getStyles from './customTextInput.styles';
 
 export interface CustomTextInputProps extends TextInputProps {
   label?: string;
@@ -20,7 +20,7 @@ export interface CustomTextInputProps extends TextInputProps {
   rightIcon?: React.ReactNode;
 }
 
-const CustomTextInput: React.FC<CustomTextInputProps> = ({
+export const CustomTextInput: React.FC<CustomTextInputProps> = ({
   label,
   error,
   containerStyle,
@@ -52,5 +52,3 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
     </View>
   );
 };
-
-export default CustomTextInput;

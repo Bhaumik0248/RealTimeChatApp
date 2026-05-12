@@ -3,13 +3,13 @@ import { View, ActivityIndicator, Modal } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '@types';
 import { getTheme } from '@utils';
-import { styles } from './Loader.styles';
+import { styles } from './loader.styles';
 
 interface LoaderProps {
   visible?: boolean;
 }
 
-const Loader: React.FC<LoaderProps> = ({ visible = true }) => {
+export const Loader: React.FC<LoaderProps> = ({ visible = true }) => {
   const isDark = useSelector((state: RootState) => state.theme?.isDark);
   const theme = getTheme(isDark);
 
@@ -32,5 +32,3 @@ const Loader: React.FC<LoaderProps> = ({ visible = true }) => {
     </Modal>
   );
 };
-
-export default Loader;

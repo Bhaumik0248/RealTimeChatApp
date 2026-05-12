@@ -3,7 +3,7 @@ import { View, Image, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '@types';
 import { getTheme } from '@utils';
-import { getUserProfileViewStyles } from './UserProfileView.styles';
+import { getUserProfileViewStyles } from './userProfileView.styles';
 
 interface UserProfileViewProps {
   user?: {
@@ -15,7 +15,7 @@ interface UserProfileViewProps {
   paddingRight?: number;
 }
 
-const UserProfileView: React.FC<UserProfileViewProps> = ({
+export const UserProfileView: React.FC<UserProfileViewProps> = ({
   user = {},
   size = 50,
   paddingRight = 0,
@@ -60,5 +60,3 @@ const UserProfileView: React.FC<UserProfileViewProps> = ({
     </View>
   );
 };
-
-export default UserProfileView;

@@ -1,2 +1,1 @@
-export { default as SendButton } from './SendButton';
-export * from './SendButton';
+export * from './sendButton';

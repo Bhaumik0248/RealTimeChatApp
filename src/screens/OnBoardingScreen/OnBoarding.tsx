@@ -6,10 +6,10 @@ import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 //Component or Local Imports
 import { Loader, SafeView, CustomTextInput, CustomSubmitButton } from '@components';
-import getOnBoardingStyles from './OnBoardingStyles';
-import { useOnBoardingHooks } from './OnBoarding.hooks';
+import getOnBoardingStyles from './onBoardingStyles';
+import { useOnBoardingHooks } from './onBoarding.hooks';
 
-const OnBoarding = ({ route, navigation }: { route: any; navigation: any }) => {
+export const OnBoarding = ({ route, navigation }: { route: any; navigation: any }) => {
   const {
     firstName,
     setFirstName,
@@ -102,5 +102,3 @@ const OnBoarding = ({ route, navigation }: { route: any; navigation: any }) => {
     </SafeView>
   );
 };
-
-export default OnBoarding;

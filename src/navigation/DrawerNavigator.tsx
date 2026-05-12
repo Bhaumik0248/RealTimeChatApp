@@ -10,7 +10,7 @@ import { CustomDrawer } from './customDrawer';
 
 const Drawer = createDrawerNavigator();
 
-const DrawerNavigator = () => {
+export const DrawerNavigator = () => {
   const isDark = useSelector((state: RootState) => state.theme?.isDark);
   const theme = getTheme(isDark);
 
@@ -60,5 +60,3 @@ const DrawerNavigator = () => {
     </Drawer.Navigator>
   );
 };
-
-export default DrawerNavigator;

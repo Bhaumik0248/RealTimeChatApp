@@ -1,3 +1,1 @@
-import ImagePreviewModal from './ImagePreviewModal';
-
-export default ImagePreviewModal;
+export * from './imagePreviewModal';

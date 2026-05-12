@@ -1,3 +1,3 @@
 export * from './customDrawer';
-export { AppNavigator } from './AppNavigator';
+export { AppNavigator } from './appNavigator';
 export * from './routes';

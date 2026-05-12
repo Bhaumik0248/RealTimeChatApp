@@ -1,1 +1,1 @@
-export { default as CustomDrawer } from './CustomDrawer';
+export * from './customDrawer';

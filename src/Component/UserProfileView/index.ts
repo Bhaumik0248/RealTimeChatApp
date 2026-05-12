@@ -1,3 +1,1 @@
-import UserProfileView from './UserProfileView';
-
-export default UserProfileView;
+export * from './userProfileView';

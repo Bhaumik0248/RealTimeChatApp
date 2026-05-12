@@ -1,4 +1,4 @@
-export * from './CommonFuntions';
-export * from './CommonSnackBar';
-export * from './Constant';
+export * from './commonFunctions';
+export * from './commonSnackBar';
+export * from './constant';
 export * from '../resources';

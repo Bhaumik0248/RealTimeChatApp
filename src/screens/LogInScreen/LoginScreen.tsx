@@ -8,10 +8,11 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import { Loader, SafeView, CustomTextInput } from '@components';
 import { Images } from '@assets';
 import { Constant } from '@utils';
-import loginScreenStyles from './LoginScreenStyles';
-import { useLoginHooks } from './LoginScreen.hooks';
+import loginScreenStyles from './loginScreenStyles';
+import { useLoginHooks } from './loginScreen.hooks';
 import { CustomSubmitButton } from '@components';
-const LoginScreen = ({ navigation }: { navigation: any }) => {
+
+export const LoginScreen = ({ navigation }: { navigation: any }) => {
   const {
     email,
     emailError,
@@ -85,5 +86,3 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
     </SafeView>
   );
 };
-
-export default LoginScreen;

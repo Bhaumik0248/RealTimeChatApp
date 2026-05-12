@@ -31,7 +31,7 @@ interface SafeViewProps {
   extraScrollHeight?: number;
 }
 
-const SafeView = ({
+export const SafeView = ({
   children,
   style,
   statusBarColor,
@@ -141,4 +141,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SafeView;
+

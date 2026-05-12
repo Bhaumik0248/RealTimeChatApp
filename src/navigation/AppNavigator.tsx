@@ -5,10 +5,10 @@ import { RootState } from '@types';
 
 import {
   LoginScreen,
-  OnBoardingScreen as OnBoarding,
+  OnBoarding,
   ChatScreen,
 } from '@screens';
-import DrawerNavigator from './DrawerNavigator';
+import { DrawerNavigator } from './drawerNavigator';
 import { Routes } from './routes';
 
 const Stack = createStackNavigator();
@@ -33,4 +33,3 @@ export const AppNavigator = () => {
     </Stack.Navigator>
   );
 };
-export default AppNavigator;

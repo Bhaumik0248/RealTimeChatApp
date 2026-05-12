@@ -9,10 +9,10 @@ import { Loader, SafeView, UserProfileView } from '@components';
 import { formatTime } from '@utils';
 import { User } from '@types';
 import { Routes } from '@navigation';
-import getHomeScreenStyles from './HomeScreenStyles';
-import { useHomeHooks } from './HomeScreen.hooks';
+import getHomeScreenStyles from './homeScreenStyles';
+import { useHomeHooks } from './homeScreen.hooks';
 
-const HomeScreen = ({ navigation }: { navigation: any }) => {
+export const HomeScreen = ({ navigation }: { navigation: any }) => {
   const {
     isLoading,
     isDark,
@@ -91,5 +91,3 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
     </SafeView>
   );
 };
-
-export default HomeScreen;

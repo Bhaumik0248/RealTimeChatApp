@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Svg, { Path } from 'react-native-svg';
+import Svg, { Path, SvgProps } from 'react-native-svg';
 
-const SendButton = (props) => (
+export const SendButton = (props: SvgProps) => (
   <Svg
     width={24}
     height={24}
@@ -26,5 +26,3 @@ const SendButton = (props) => (
     />
   </Svg>
 );
-
-export default SendButton;
