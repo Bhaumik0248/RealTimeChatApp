@@ -26,7 +26,7 @@ export const startLocalMessageListener = (userId: string) => {
 
       const senderSnapshot = await database()
         .ref(`users/${senderId}`)
-        .once('child_changed');
+        .once('value');
       const senderData = senderSnapshot.val();
       const senderName = senderData
         ? `${senderData.firstName} ${senderData.lastName}`
