@@ -28,11 +28,13 @@ A premium, high-performance real-time chat application built with **React Native
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js & npm/yarn
 - CocoaPods (for iOS)
 - Firebase Account & Project
 
 ### Installation
+
 1. Clone the repository:
    ```bash
    git clone https://github.com/Bhaumik0248/RealTimeChatApp.git
@@ -55,8 +57,6 @@ A premium, high-performance real-time chat application built with **React Native
    npm run ios
    ```
 
-## 📱 Screenshots
-*(Add your own screenshots here to wow your visitors!)*
-
 ## 📄 License
+
 This project is licensed under the MIT License.
