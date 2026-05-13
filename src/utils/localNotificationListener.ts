@@ -10,7 +10,7 @@ export const startLocalMessageListener = (userId: string) => {
 
   chatListListener = database()
     .ref(`chatList/${userId}`)
-    .on('value', async snapshot => {
+    .on('child_changed', async snapshot => {
       const data = snapshot.val();
       const senderId = snapshot.key;
 
@@ -26,7 +26,7 @@ export const startLocalMessageListener = (userId: string) => {
 
       const senderSnapshot = await database()
         .ref(`users/${senderId}`)
-        .once('value');
+        .once('child_changed');
       const senderData = senderSnapshot.val();
       const senderName = senderData
         ? `${senderData.firstName} ${senderData.lastName}`
@@ -56,7 +56,7 @@ export const startLocalMessageListener = (userId: string) => {
 
 export const stopLocalMessageListener = (userId: string) => {
   if (chatListListener) {
-    database().ref(`chatList/${userId}`).off('value', chatListListener);
+    database().ref(`chatList/${userId}`).off('child_changed', chatListListener);
     chatListListener = null;
   }
 };
