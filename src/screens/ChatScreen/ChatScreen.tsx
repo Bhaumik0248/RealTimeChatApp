@@ -16,7 +16,13 @@ import { Loader, ImagePreviewModal, SafeView } from '@components';
 import chatScreenStyles from './chatScreenStyles';
 import { useChatScreenHooks } from './chatScreen.hooks';
 
-export const ChatScreen = ({ navigation, route }: { navigation: any; route: any }) => {
+export const ChatScreen = ({
+  navigation,
+  route,
+}: {
+  navigation: any;
+  route: any;
+}) => {
   const {
     message,
     setMessage,
@@ -42,7 +48,8 @@ export const ChatScreen = ({ navigation, route }: { navigation: any; route: any 
       statusBarStyle={isDark ? 'light-content' : 'dark-content'}
       statusBarColor={theme.headerBg}
       translucent={false}
-      edges={['top', 'bottom']}
+      isKeyboardAvoiding={true}
+      keyboardOffset={Platform.OS === 'ios' ? 90 : 0}
     >
       {isLoading && <Loader />}
       {noChatFound ? (

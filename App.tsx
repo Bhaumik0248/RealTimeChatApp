@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -10,8 +10,9 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { StatusBar } from 'react-native';
 import { useSelector } from 'react-redux';
-import { getNavigationTheme } from '@utils';
+import { getNavigationTheme, navigationRef, startLocalMessageListener, stopLocalMessageListener, setupInitialNotification } from '@utils';
 import Toast from 'react-native-toast-message';
+import { RootState } from '@types';
 
 export function App() {
   return (
@@ -29,14 +30,28 @@ export function App() {
 
 const AppRoot = () => {
   const isDark = useSelector((state: any) => state.theme?.isDark);
+  const user = useSelector((state: RootState) => state.user);
   const theme = getNavigationTheme(isDark);
 
+  useEffect(() => {
+    setupInitialNotification();
+  }, []);
+
+  useEffect(() => {
+    if (user?.uid) {
+      startLocalMessageListener(user.uid);
+    }
+    return () => {
+      if (user?.uid) {
+        stopLocalMessageListener(user.uid);
+      }
+    };
+  }, [user?.uid]);
+
   return (
-    <NavigationContainer theme={theme}>
+    <NavigationContainer theme={theme} ref={navigationRef}>
       <AppNavigator />
       <Toast />
     </NavigationContainer>
   );
 };
-
-

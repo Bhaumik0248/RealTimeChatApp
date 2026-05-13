@@ -93,6 +93,7 @@ export const useLoginHooks = (navigation: any) => {
           email.trim(),
           password,
         );
+
         const uid = userCredential.user.uid;
         const safeEmail = getSafeEmail(email);
         await database().ref(`/users/${uid}`).set({

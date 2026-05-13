@@ -15,6 +15,7 @@ import {
   Constant,
   getTheme,
   showSnackbar,
+  sendMessage,
 } from '@utils';
 import {
   pickImage,
@@ -42,6 +43,10 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
   const [imageList, setImageList] = useState<{ id: string; url: string }[]>([]);
 
   const sectionListRef = useRef<any>(null);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messageHistory]);
 
   useEffect(() => {
     const show = Keyboard.addListener('keyboardDidShow', () => {
@@ -165,7 +170,10 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
   const handleSend = async () => {
     if (!message.trim() || !currentUser?.uid) return;
 
+    const chatId = [currentUser.uid, selectedUser.uid].sort().join('_');
+
     await sendMessage({
+      chatId,
       senderId: currentUser.uid,
       receiverId: selectedUser.uid,
       message: message.trim(),
@@ -204,7 +212,10 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
         return;
       }
 
+      const chatId = [currentUser.uid, selectedUser.uid].sort().join('_');
+
       await sendMessage({
+        chatId,
         senderId: currentUser.uid,
         receiverId: selectedUser.uid,
         message: url,
@@ -219,49 +230,6 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const sendMessage = async ({
-    senderId,
-    receiverId,
-    message,
-    msgType,
-  }: {
-    senderId: string;
-    receiverId: string;
-    message: string;
-    msgType: string;
-  }) => {
-    const chatId = [senderId, receiverId].sort().join('_');
-    const timestamp = database.ServerValue.TIMESTAMP;
-
-    const newMessageRef = database().ref(`chats/${chatId}/messages`).push();
-    const lastMsgText = msgType === 'text' ? message : '📷 Image';
-
-    const updates: any = {};
-    updates[`chats/${chatId}/messages/${newMessageRef.key}`] = {
-      senderId,
-      receiverId,
-      message: msgType === 'text' ? message : '',
-      image: msgType === 'image' ? message : '',
-      msgType,
-      isSeen: false,
-      timestamp,
-    };
-
-    updates[`chatList/${senderId}/${receiverId}`] = {
-      lastMessage: lastMsgText,
-      timestamp,
-      unreadCount: 0,
-    };
-
-    updates[`chatList/${receiverId}/${senderId}`] = {
-      lastMessage: lastMsgText,
-      timestamp,
-      unreadCount: database.ServerValue.increment(1),
-    };
-
-    return database().ref().update(updates);
   };
 
   const renderItem = ({ item }: { item: Message }) => {

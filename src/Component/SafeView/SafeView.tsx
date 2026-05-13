@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Platform,
   StyleProp,
+  KeyboardAvoidingView,
 } from 'react-native';
 //Third Party Imports
 import { useSafeAreaInsets, Edge } from 'react-native-safe-area-context';
@@ -30,6 +31,8 @@ interface SafeViewProps {
   bottomColor?: string;
   translucent?: boolean;
   enableKeyboard?: boolean;
+  isKeyboardAvoiding?: boolean;
+  keyboardOffset?: number;
   extraScrollHeight?: number;
 }
 
@@ -44,6 +47,8 @@ export const SafeView = ({
   bottomColor,
   translucent = true,
   enableKeyboard = false,
+  isKeyboardAvoiding = false,
+  keyboardOffset = 0,
   extraScrollHeight = 0,
 }: SafeViewProps) => {
   const isDark = useSelector((state: RootState) => state.theme?.isDark);
@@ -78,8 +83,10 @@ export const SafeView = ({
   const isEdgeSelected = (edge: Edge): boolean => edges.includes(edge);
 
   const renderContent = () => {
+    let content = children;
+
     if (enableKeyboard) {
-      return (
+      content = (
         <KeyboardAwareScrollView
           style={styles.keyboardAware}
           contentContainerStyle={styles.keyboardAwareContent}
@@ -92,7 +99,20 @@ export const SafeView = ({
         </KeyboardAwareScrollView>
       );
     }
-    return children;
+
+    if (isKeyboardAvoiding) {
+      content = (
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+          style={{ flex: 1 }}
+          keyboardVerticalOffset={keyboardOffset}
+        >
+          {content}
+        </KeyboardAvoidingView>
+      );
+    }
+
+    return content;
   };
 
   return (
