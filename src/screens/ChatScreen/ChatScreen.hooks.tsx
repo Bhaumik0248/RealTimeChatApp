@@ -41,16 +41,9 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [keyboardVisible, setKeyboardVisible] = useState(false);
   const [imageList, setImageList] = useState<{ id: string; url: string }[]>([]);
+  const [isMuted, setIsMuted] = useState(false);
 
   const sectionListRef = useRef<any>(null);
-
-  useEffect(() => {
-    // Small delay ensures the SectionList has finished its initial render
-    const timer = setTimeout(() => {
-      scrollToBottom();
-    }, 100);
-    return () => clearTimeout(timer);
-  }, [messageHistory]);
 
   useEffect(() => {
     const show = Keyboard.addListener('keyboardDidShow', () => {
@@ -97,9 +90,23 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
       .ref(`chats/${chatId}/messages`)
       .orderByChild('timestamp');
 
+    const muteRef = database().ref(
+      `users/${currentUser.uid}/mutedChats/${selectedUser.uid}`,
+    );
+    muteRef.on('value', snapshot => {
+      const val = !!snapshot.val();
+      console.log('ChatScreen - Mute status updated from Private Settings:', val);
+      setIsMuted(val);
+    });
+
     ref.on('value', snapshot => {
       const data = snapshot.val();
       if (data) {
+        // Reset unread count since we are actively viewing the chat
+        database()
+          .ref(`chatList/${currentUser.uid}/${selectedUser.uid}`)
+          .update({ unreadCount: 0 });
+
         const list = Object.entries(data).map(([id, msg]: [string, any]) => {
           const messageData = msg as Message;
           if (
@@ -123,7 +130,10 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
       setIsLoading(false);
     });
 
-    return () => ref.off('value');
+    return () => {
+      ref.off('value');
+      muteRef.off('value');
+    };
   }, [currentUser?.uid, selectedUser?.uid]);
 
   useLayoutEffect(() => {
@@ -137,6 +147,15 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
         >
           {selectedUser?.firstName} {selectedUser?.lastName}
         </Text>
+      ),
+      headerRight: () => (
+        <TouchableOpacity onPress={toggleMute} style={{ marginRight: 15 }}>
+          <IoniconsIcon
+            name={isMuted ? 'volume-mute-outline' : 'volume-high-outline'}
+            size={24}
+            color={theme.headerText}
+          />
+        </TouchableOpacity>
       ),
       headerLeft: () => (
         <>
@@ -169,7 +188,20 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
         </>
       ),
     });
-  }, [navigation, selectedUser, theme]);
+  }, [navigation, selectedUser, theme, isMuted]);
+
+  const toggleMute = async () => {
+    try {
+      if (!currentUser?.uid || !selectedUser?.uid) return;
+      const newMuteStatus = !isMuted;
+      console.log('ChatScreen - Toggling mute in Private Settings to:', newMuteStatus);
+      await database()
+        .ref(`users/${currentUser.uid}/mutedChats/${selectedUser.uid}`)
+        .set(newMuteStatus ? true : null); // true or remove it
+    } catch (error) {
+      console.error('Error toggling mute:', error);
+    }
+  };
 
   const handleSend = async () => {
     if (!message.trim() || !currentUser?.uid) return;
@@ -189,17 +221,26 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
 
   const scrollToBottom = () => {
     if (!sectionListRef.current || messageHistory.length === 0) return;
-    const lastSection = messageHistory[messageHistory.length - 1];
+
+    const lastSectionIndex = messageHistory.length - 1;
+    const lastSection = messageHistory[lastSectionIndex];
+
     if (!lastSection?.data?.length) return;
-    try {
-      sectionListRef.current.scrollToLocation({
-        sectionIndex: messageHistory.length - 1,
-        itemIndex: lastSection.data.length - 1,
-        animated: false,
-      });
-    } catch (e) {
-      console.log('ChatScreen - scrollToBottom - Catch :Error', e);
-    }
+
+    const lastItemIndex = lastSection.data.length - 1;
+
+    requestAnimationFrame(() => {
+      try {
+        sectionListRef.current?.scrollToLocation({
+          sectionIndex: lastSectionIndex,
+          itemIndex: lastItemIndex,
+          animated: true,
+          viewOffset: 20,
+        });
+      } catch (e) {
+        console.log('Scroll error:', e);
+      }
+    });
   };
 
   const handleMedia = async (useCamera = false) => {
@@ -332,5 +373,6 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
     handleSend,
     handleMedia,
     renderItem,
+    scrollToBottom,
   };
 };

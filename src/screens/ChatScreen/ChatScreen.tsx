@@ -40,6 +40,7 @@ export const ChatScreen = ({
     handleSend,
     handleMedia,
     renderItem,
+    scrollToBottom,
   } = useChatScreenHooks(navigation, route);
 
   return (
@@ -59,6 +60,13 @@ export const ChatScreen = ({
       ) : (
         <SectionList
           ref={sectionListRef}
+          onContentSizeChange={scrollToBottom}
+          onScrollToIndexFailed={() => {
+            setTimeout(() => {
+              scrollToBottom();
+            }, 300);
+          }}
+          onLayout={() => scrollToBottom()}
           sections={messageHistory}
           keyExtractor={item => item.id}
           renderItem={renderItem}
