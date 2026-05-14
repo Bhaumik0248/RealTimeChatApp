@@ -1,28 +1,30 @@
 # Real-Time Chat App 🚀
 
-A premium, high-performance real-time chat application built with **React Native** and **Firebase**. This app features a local-first notification system, smooth theme transitions, and an optimized mobile experience.
+A premium, high-performance real-time chat application built with **React Native** and **Firebase**. This app features a robust notification system, direct reply capabilities, and granular chat controls.
 
 ## ✨ Features
 
 - **Real-Time Messaging**: Instant message delivery powered by Firebase Realtime Database.
-- **Local Notification System**: Smart notification handling using Notifee.
-  - Suppresses notifications for the sender.
-  - Automatically hides notifications if you are already viewing the chat.
-  - Tap to navigate directly to the conversation.
+- **Premium Notification System**:
+  - **Direct Reply**: Respond to messages directly from the notification tray (Foreground & Background).
+  - **Smart Suppression**: Automatically silences notifications for the sender or when the chat is active.
+  - **Deep Linking**: Tap notifications to jump directly into the conversation.
+- **Granular Controls**:
+  - **Per-Chat Mute**: Silence specific conversations to focus on what matters.
+  - **Unread Counters**: Real-time tracking of missed messages across all chats.
 - **Premium UI/UX**:
   - **Dynamic Themes**: Smooth animated transitions between Light and Dark modes.
-  - **Auto-Scrolling**: Chat automatically scrolls to the newest message.
-  - **Keyboard Optimization**: Seamless input handling for both iOS and Android.
-- **Image Sharing**: Send photos directly from your camera or gallery.
-- **Unread Counters**: Real-time tracking of missed messages.
+  - **Auto-Scrolling**: Intelligently scrolls to the latest message.
+  - **Keyboard Handling**: Seamless input experience optimized for iOS and Android.
+- **Multimedia Support**: Send and receive high-quality images from camera or gallery.
 
 ## 🛠️ Technology Stack
 
 - **Framework**: React Native
 - **Database**: Firebase Realtime Database
 - **Auth**: Firebase Authentication
-- **Notifications**: Notifee & Firebase Cloud Messaging
-- **State Management**: Redux Toolkit
+- **Notifications**: Notifee & Firebase Cloud Messaging (FCM)
+- **State Management**: Redux Toolkit & Persist
 - **Navigation**: React Navigation
 
 ## 🚀 Getting Started
@@ -42,8 +44,6 @@ A premium, high-performance real-time chat application built with **React Native
 2. Install dependencies:
    ```bash
    npm install
-   # or
-   yarn install
    ```
 3. Install iOS pods:
    ```bash
