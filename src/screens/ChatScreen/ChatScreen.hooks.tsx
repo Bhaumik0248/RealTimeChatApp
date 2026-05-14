@@ -45,7 +45,11 @@ export const useChatScreenHooks = (navigation: any, route: any) => {
   const sectionListRef = useRef<any>(null);
 
   useEffect(() => {
-    scrollToBottom();
+    // Small delay ensures the SectionList has finished its initial render
+    const timer = setTimeout(() => {
+      scrollToBottom();
+    }, 100);
+    return () => clearTimeout(timer);
   }, [messageHistory]);
 
   useEffect(() => {
